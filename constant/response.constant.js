@@ -9,4 +9,8 @@ module.exports = {
     INTERNAL_SERVER_ERROR: 500,
     NOT_ALLOWED: 405,
     NO_CONTENT: 204,
+
+    Service_Unavailable: 503,
+    Locked: 423,
+    
 };

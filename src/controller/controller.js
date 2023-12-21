@@ -37,7 +37,8 @@ const fcm = admin.messaging();
 
 setInterval(async () => {
     try {
-        await class2.k();
+        // await class2.k();
+        await class2.s();
     } catch (error) {
         console.error("Error occurred:", error);
     }
@@ -83,6 +84,16 @@ class class1 {
 
                     if (req.body.UserName && req.body.Phone) {
 
+                        const currentDate2 = await new Date();
+
+                        currentDate2.setDate(currentDate2.getDate() - 1);
+
+                        const year = await currentDate2.getFullYear();
+                        const month = await currentDate2.getMonth() + 1;
+                        const day = await currentDate2.getDate();
+
+                        let PlanExpiredDate = await `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
                         if (req.body.RegistrationNumber) {
 
                             let data = new Todo({
@@ -102,7 +113,9 @@ class class1 {
                                     }
                                 ],
                                 TimeUpdateStatus: 0,
-                                Request: 0
+                                Request: 0,
+                                PlanPurchase: "Single Payment",
+                                PlanExpiredDate: PlanExpiredDate,
                             })
                             await data.save();
 
@@ -114,7 +127,9 @@ class class1 {
                                 Phone: req.body.Phone,
                                 VehicleDetail: [],
                                 TimeUpdateStatus: 0,
-                                Request: 0
+                                Request: 0,
+                                PlanPurchase: "Single Payment",
+                                PlanExpiredDate: PlanExpiredDate,
                             })
                             await data.save();
 
@@ -280,6 +295,16 @@ class class1 {
 
                 const formattedDateTime = `${currentYear}-${currentMonth}-${currentDay}`;
 
+                const currentDate2 = await new Date();
+
+                currentDate2.setDate(currentDate2.getDate() - 1);
+
+                const year = await currentDate2.getFullYear();
+                const month = await currentDate2.getMonth() + 1;
+                const day = await currentDate2.getDate();
+
+                let PlanExpiredDate = await `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
                 const data = new Todo2({
                     UserName: await req.body.UserName.toLowerCase(),
                     ManagerName: req.body.ManagerName,
@@ -301,6 +326,8 @@ class class1 {
                     State: StateName,
                     UserWaitTime: UserWaitTimeArray,
                     AccountCreateDate: formattedDateTime,
+                    PlanPurchase: "Single Payment",
+                    PlanExpiredDate: PlanExpiredDate,
                 });
 
                 await data.save();
@@ -1480,7 +1507,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static j2 = async (req, res) => {
+    static k = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -1517,7 +1544,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static k = async (req, res) => {
+    static l = async (req, res) => {
         try {
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Parked" })
@@ -1670,7 +1697,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static l = async (req, res) => {
+    static m = async (req, res) => {
         try {
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
             if (ParkedCar.length !== 0) {
@@ -1829,7 +1856,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static m = async (req, res) => {
+    static n = async (req, res) => {
         try {
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
 
@@ -1885,7 +1912,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static n = async (req, res) => {
+    static o = async (req, res) => {
         try {
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
@@ -1988,29 +2015,29 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static o = async (req, res) => {
-        try {
-            var User = await Todo.find({})
-            var message = { "data": User, "status": `${HTTP.SUCCESS}` }
-            res.status(HTTP.SUCCESS).json({ message });
-        } catch (e) {
-            console.log(e);
-            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
-            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
-        }
-    };
+    // static o = async (req, res) => {
+    //     try {
+    //         var User = await Todo.find({})
+    //         var message = { "data": User, "status": `${HTTP.SUCCESS}` }
+    //         res.status(HTTP.SUCCESS).json({ message });
+    //     } catch (e) {
+    //         console.log(e);
+    //         var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+    //         res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+    //     }
+    // };
+    // static p = async (req, res) => {
+    //     try {
+    //         var User = await Todo2.find({})
+    //         var message = { "message": "Data Load Successfully", "data": User, "status": `${HTTP.SUCCESS}` }
+    //         res.status(HTTP.SUCCESS).json(message);
+    //     } catch (e) {
+    //         console.log(e);
+    //         var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+    //         res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+    //     }
+    // };
     static p = async (req, res) => {
-        try {
-            var User = await Todo2.find({})
-            var message = { "message": "Data Load Successfully", "data": User, "status": `${HTTP.SUCCESS}` }
-            res.status(HTTP.SUCCESS).json(message);
-        } catch (e) {
-            console.log(e);
-            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
-            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
-        }
-    };
-    static q = async (req, res) => {
         try {
             res.render("Login");
         } catch (e) {
@@ -2019,7 +2046,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static r = async (req, res) => {
+    static q = async (req, res) => {
         try {
 
             var User = await Todo3.findOne({ Username: req.body.UsernameEmail });
@@ -2088,7 +2115,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static s = async (req, res) => {
+    static r = async (req, res) => {
         try {
 
             req.session.destroy();
@@ -2100,7 +2127,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static t = async (req, res) => {
+    static s = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2136,7 +2163,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static u = async (req, res) => {
+    static t = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2174,7 +2201,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static u2 = async (req, res) => {
+    static u = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2219,7 +2246,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static u3 = async (req, res) => {
+    static v = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2257,7 +2284,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static u4 = async (req, res) => {
+    static w = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2303,7 +2330,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static v = async (req, res) => {
+    static x = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2353,7 +2380,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static v2 = async (req, res) => {
+    static y = async (req, res) => {
 
         try {
 
@@ -2508,7 +2535,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static w = async (req, res) => {
+    static z = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2546,7 +2573,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static w2 = async (req, res) => {
+    static A = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2616,7 +2643,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static x = async (req, res) => {
+    static B = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2654,7 +2681,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static x2 = async (req, res) => {
+    static C = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2724,7 +2751,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static y = async (req, res) => {
+    static D = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2762,7 +2789,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static y2 = async (req, res) => {
+    static E = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2832,7 +2859,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static z = async (req, res) => {
+    static F = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2870,7 +2897,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static z2 = async (req, res) => {
+    static G = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -2940,7 +2967,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static A = async (req, res) => {
+    static H = async (req, res) => {
         try {
             if (req.body.latitude && req.body.longitude) {
                 const data = await Todo2.find({});
@@ -2996,7 +3023,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static B = async (req, res) => {
+    static I = async (req, res) => {
         try {
             if (req.body.latitude && req.body.longitude) {
                 const data = await Todo2.find({});
@@ -3056,7 +3083,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static C = async (req, res) => {
+    static J = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -3107,7 +3134,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static D = async (req, res) => {
+    static K = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -3175,7 +3202,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static E = async (req, res) => {
+    static L = async (req, res) => {
         try {
             if (req.UserName) {
                 var User = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
@@ -3192,7 +3219,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static F = async (req, res) => {
+    static M = async (req, res) => {
         try {
 
             if (req.Phone) {
@@ -3233,7 +3260,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static G = async (req, res) => {
+    static N = async (req, res) => {
         try {
 
             if (req.Phone) {
@@ -3352,7 +3379,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static H = async (req, res) => {
+    static O = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -3426,7 +3453,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static I = async (req, res) => {
+    static P = async (req, res) => {
         try {
 
             var User = await Todo.find({});
@@ -3522,7 +3549,7 @@ class class1 {
     //         res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
     //     }
     // };
-    static J = async (req, res) => {
+    static Q = async (req, res) => {
         try {
 
             if (req.files && req.UserName) {
@@ -3646,7 +3673,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static K = async (req, res) => {
+    static R = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -3784,7 +3811,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static L = async (req, res) => {
+    static S = async (req, res) => {
         try {
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
@@ -3913,7 +3940,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static L2 = async (req, res) => {
+    static T = async (req, res) => {
         try {
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Accepted" })
@@ -4007,7 +4034,7 @@ class class1 {
             res.status(HTTP.SUCCESS).json(a);
         }
     };
-    static M = async (req, res) => {
+    static U = async (req, res) => {
         try {
 
             const message = {
@@ -4032,7 +4059,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static N = async (req, res) => {
+    static V = async (req, res) => {
         try {
             var Company = await Todo5.find({});
             var CompanyName = [];
@@ -4047,7 +4074,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static O = async (req, res) => {
+    static W = async (req, res) => {
         try {
 
             var Model = await Todo5.find({ CompanyName: req.body.CompanyName });
@@ -4063,7 +4090,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static P = async (req, res) => {
+    static X = async (req, res) => {
         try {
 
             if (req.body.Phone) {
@@ -4117,7 +4144,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static Q = async (req, res) => {
+    static Y = async (req, res) => {
         try {
 
             if (req.body.otp && req.body.Phone) {
@@ -4165,7 +4192,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static R = async (req, res) => {
+    static Z = async (req, res) => {
         try {
 
             if (req.body.otp && req.body.Phone && req.body.Password) {
@@ -4281,7 +4308,10 @@ class class1 {
     //         res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
     //     }
     // };
-    static S = async (req, res) => {
+}
+
+class class2 {
+    static a = async (req, res) => {
         try {
 
             if (req.body.Phone && req.Phone && req.body.Name) {
@@ -4330,7 +4360,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static T = async (req, res) => {
+    static b = async (req, res) => {
         try {
 
             if (req.body.Date && req.Phone && req.body.Time && req.body.BusinessUserName) {
@@ -4398,7 +4428,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static U = async (req, res) => {
+    static c = async (req, res) => {
         try {
 
             if (req.Phone) {
@@ -4428,7 +4458,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static V = async (req, res) => {
+    static d = async (req, res) => {
         try {
 
             if (req.Phone) {
@@ -4457,7 +4487,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static W = async (req, res) => {
+    static e = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -4485,7 +4515,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static X = async (req, res) => {
+    static f = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -4517,7 +4547,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static Y = async (req, res) => {
+    static g = async (req, res) => {
         try {
 
             if (req.body.RegistrationNumber) {
@@ -4591,7 +4621,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static Z = async (req, res) => {
+    static h = async (req, res) => {
         try {
 
             if (req.body.Search && req.Phone) {
@@ -4654,10 +4684,7 @@ class class1 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-}
-
-class class2 {
-    static a = async (req, res) => {
+    static i = async (req, res) => {
         try {
 
             if (req.body.Name && req.body.Phone && req.body.Username && req.body.Password && req.UserName) {
@@ -4680,6 +4707,16 @@ class class2 {
                             res.status(HTTP.UNAUTHORIZED).json(response);
                         } else {
 
+                            const currentDate2 = await new Date();
+
+                            currentDate2.setDate(currentDate2.getDate() - 1);
+
+                            const year = await currentDate2.getFullYear();
+                            const month = await currentDate2.getMonth() + 1;
+                            const day = await currentDate2.getDate();
+
+                            let PlanExpiredDate = await `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
                             const hashedPassword = await bcrypt.hash(req.body.Password, 12);
                             var UnitName = User[0].UnitName;
                             let data = new Todo8({
@@ -4692,7 +4729,9 @@ class class2 {
                                 Fcm: "",
                                 token: "",
                                 ValetStatus: 0,
-                                Profile: []
+                                Profile: [],
+                                PlanPurchase: "Single Payment",
+                                PlanExpiredDate: PlanExpiredDate,
                             })
                             await data.save();
 
@@ -4730,7 +4769,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static b = async (req, res) => {
+    static j = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -4765,7 +4804,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static c = async (req, res) => {
+    static k = async (req, res) => {
         try {
 
             if (req.UserName && req.body.UserName) {
@@ -4820,7 +4859,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static d = async (req, res) => {
+    static l = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -4996,7 +5035,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static e = async (req, res) => {
+    static m = async (req, res) => {
         try {
 
             if (req.Phone) {
@@ -5082,7 +5121,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static f = async (req, res) => {
+    static n = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -5144,7 +5183,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static g = async (req, res) => {
+    static o = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -5215,7 +5254,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static h = async (req, res) => {
+    static p = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -5253,7 +5292,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static i = async (req, res) => {
+    static q = async (req, res) => {
         try {
 
             if (req.UserName && req.body.Day1 && req.body.Day2 && req.body.Day3 && req.body.Day4 && req.body.Day5 && req.body.Day6 && req.body.Day7) {
@@ -5338,7 +5377,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static j = async (req, res) => {
+    static r = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -5491,7 +5530,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static k = async (req, res) => {
+    static s = async (req, res) => {
         try {
 
             var User = await Todo7.find({})
@@ -5549,7 +5588,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static l = async (req, res) => {
+    static t = async (req, res) => {
         try {
 
             if (req.UserName) {
@@ -5721,7 +5760,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static m = async (req, res) => {
+    static u = async (req, res) => {
         try {
             const response = await axios.get("https://script.googleusercontent.com/macros/echo?user_content_key=obXmgEiZR-BfQMcwCsdgbNnPzHN1kHwmtbkNVY2-PR7G2srDn3hVTDPy2b0veNEhmvhHKn12tJPdYO6W_VUjFmqfg--ElfwRm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnJaYWBhz5wfVLkgtTUwDnLLdIDBSWzbBsMVHTq6y-K-r-K-WpWL0s9kMxkR_CFfV78kchrJTgzmq9E15cQuEZj83w8ye-O6D1Q&lib=Mz_e7_X4Ey1qyKl-o3h_jvVScKf4pGqo7");
             var Company = await Todo5.find({});
@@ -5743,7 +5782,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static n = async (req, res) => {
+    static v = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -5764,7 +5803,7 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-    static o = async (req, res) => {
+    static w = async (req, res) => {
         try {
 
             if (req.session.userid) {
@@ -5791,35 +5830,83 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-
-    static p = async (req, res) => {
+    static x = async (req, res) => {
         try {
 
             if (req.Phone) {
 
                 var User = await Todo.findOne({ Phone: req.Phone })
 
-                var User2 = await Todo9.find({})
+                if (User) {
 
-                var SendData = [];
+                    function compareDates(inputDate, inputDate2) {
 
-                for(var i=0;i<User2.length;i++){
+                        const inputDateTime = new Date(inputDate);
+                        const inputDateTime2 = new Date(inputDate2);
 
-                    var a = {
-                        "Plan": User2[i].Plan,
-                        "PlanAmount": User2[i].PlanAmount,
-                        "ActualPrice": User2[i].ActualPrice,
-                        "Message": User2[i].Message,
-                        "OffAmount": User2[i].OffAmount,
-                        "Active": User.PlanPurchase
+                        const inputYear = inputDateTime.getFullYear();
+                        const inputMonth = inputDateTime.getMonth() + 1;
+                        const inputDay = inputDateTime.getDate();
+
+                        const inputYear2 = inputDateTime2.getFullYear();
+                        const inputMonth2 = inputDateTime2.getMonth() + 1;
+                        const inputDay2 = inputDateTime2.getDate();
+
+                        if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
+                            //   return "Future"
+                            return 1
+                        } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
+                            //   return "Current"
+                            return 0
+                        } else {
+                            //   return "Past"
+                            return -1
+                        }
+
                     }
 
-                    await SendData.push(a);
+                    const inputDateTime = await User.PlanExpiredDate;
+
+                    const inputDateTime2 = new Date();
+
+                    const year = inputDateTime2.getFullYear();
+                    const month = inputDateTime2.getMonth() + 1;
+                    const day = inputDateTime2.getDate();
+
+                    let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                    var a = await compareDates(inputDateTime, inputDateTime3);
+
+                    if (-1 < a) {
+
+                        var User2 = await Todo9.find({ Plan: User.PlanPurchase });
+
+                        var SendData = [];
+
+                        var a = {
+                            "Plan": User2[User2.length - 1].Plan,
+                            "PlanAmount": User2[User2.length - 1].PlanAmount,
+                            "ActualPrice": User2[User2.length - 1].ActualPrice,
+                            "Message": User2[User2.length - 1].Message,
+                            "OffAmount": User2[User2.length - 1].OffAmount
+                        }
+
+                        await SendData.push(a);
+
+                        var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message);
+
+                    } else {
+                        var a = { "message": "Plan expired", "status": `${HTTP.UNAUTHORIZED}` }
+                        res.status(HTTP.UNAUTHORIZED).json(a);
+                    }
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
 
                 }
-
-                var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
-                res.status(HTTP.SUCCESS).json(message);
 
             } else if (req.UserName) {
 
@@ -5832,27 +5919,76 @@ class class2 {
                     var User3 = await User2
                 }
 
-                var User4 = await Todo9.find({})
+                if (User3) {
 
-                var SendData = [];
+                    var User4 = await Todo9.find({ Plan: User3.PlanPurchase });
 
-                for(var i=0;i<User4.length;i++){
+                    function compareDates(inputDate, inputDate2) {
 
-                    var a = {
-                        "Plan": User4[i].Plan,
-                        "PlanAmount": User4[i].PlanAmount,
-                        "ActualPrice": User4[i].ActualPrice,
-                        "Message": User4[i].Message,
-                        "OffAmount": User4[i].OffAmount,
-                        "Active": User3.PlanPurchase
+                        const inputDateTime = new Date(inputDate);
+                        const inputDateTime2 = new Date(inputDate2);
+
+                        const inputYear = inputDateTime.getFullYear();
+                        const inputMonth = inputDateTime.getMonth() + 1;
+                        const inputDay = inputDateTime.getDate();
+
+                        const inputYear2 = inputDateTime2.getFullYear();
+                        const inputMonth2 = inputDateTime2.getMonth() + 1;
+                        const inputDay2 = inputDateTime2.getDate();
+
+                        if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
+                            //   return "Future"
+                            return 1
+                        } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
+                            //   return "Current"
+                            return 0
+                        } else {
+                            //   return "Past"
+                            return -1
+                        }
+
                     }
 
-                    await SendData.push(a);
+                    const inputDateTime = await User3.PlanExpiredDate;
+
+                    const inputDateTime2 = new Date();
+
+                    const year = inputDateTime2.getFullYear();
+                    const month = inputDateTime2.getMonth() + 1;
+                    const day = inputDateTime2.getDate();
+
+                    let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                    var a = await compareDates(inputDateTime, inputDateTime3);
+
+                    if (-1 < a) {
+
+                        var SendData = [];
+
+                        var a = {
+                            "Plan": User4[User4.length - 1].Plan,
+                            "PlanAmount": User4[User4.length - 1].PlanAmount,
+                            "ActualPrice": User4[User4.length - 1].ActualPrice,
+                            "Message": User4[User4.length - 1].Message,
+                            "OffAmount": User4[User4.length - 1].OffAmount
+                        }
+
+                        await SendData.push(a);
+
+                        var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message);
+
+                    } else {
+                        var a = { "message": "Plan expired", "status": `${HTTP.UNAUTHORIZED}` }
+                        res.status(HTTP.UNAUTHORIZED).json(a);
+                    }
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
 
                 }
-                
-                var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
-                res.status(HTTP.SUCCESS).json(message);
 
             } else {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
@@ -5865,26 +6001,78 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
-
-    static q = async (req, res) => {
+    static y = async (req, res) => {
         try {
 
-            if (req.session.userid) {
+            const currentDate = await new Date();
+            const currentDate2 = await new Date();
 
-                var User2 = await Todo3.findOne({ signuptoken: req.session.userid });
+            if (req.body.PlanType == "Single Payment") {
+                await currentDate.setMonth(currentDate.getMonth() + 1);
+            } else if (req.body.PlanType == "Half Yearly Payment") {
+                await currentDate.setMonth(currentDate.getMonth() + 6);
+            } else {
+                await currentDate.setMonth(currentDate.getMonth() + 12);
+            }
 
-                const hashedPassword = await bcrypt.hash(req.body.NewPassword, 12);
+            let year = await currentDate.getFullYear();
+            let month = await currentDate.getMonth() + 1;
+            let day = await currentDate.getDate();
 
-                User2.PassWord = hashedPassword;
-                await User2.save();
+            let PlanExpiredDate = await `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
 
-                var message2 = { "message": "New Password Set Sucessfully", "data": `${User2}`, "status": `${HTTP.SUCCESS}` }
-                res.status(HTTP.SUCCESS).json(message2);
+            if (req.Phone && req.body.PlanType) {
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (User) {
+
+                    User.PlanPurchase = req.body.PlanType;
+                    User.PlanExpiredDate = await PlanExpiredDate;
+
+                    await User.save();
+
+                    var a = { "message": "Plan Purchase", "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(a);
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else if (req.UserName && req.body.PlanType) {
+
+                var User = await Todo8.findOne({ Username: req.UserName })
+                var User2 = await Todo2.findOne({ UserName: req.UserName })
+
+                if (User) {
+                    var User3 = await User
+                } else {
+                    var User3 = await User2
+                }
+
+                if (User3) {
+
+                    User3.PlanPurchase = req.body.PlanType;
+                    User3.PlanExpiredDate = await PlanExpiredDate;
+
+                    await User3.save();
+
+                    var a = { "message": "Plan Purchase", "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(a);
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
 
             } else {
-
-                res.redirect('/Login');
-
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
             }
 
         } catch (e) {

@@ -50,6 +50,9 @@ var UserSchema = new mongoose.Schema({
   },
   PlanPurchase: {
     type: String,
+  },
+  PlanExpiredDate: {
+    type: String,
   }
 });
 
@@ -146,6 +149,9 @@ const BusinessSchema = new mongoose.Schema({
     type: String,
   },
   PlanPurchase: {
+    type: String,
+  },
+  PlanExpiredDate: {
     type: String,
   }
 });
@@ -367,6 +373,9 @@ var ValetSchema = new mongoose.Schema({
   },
   PlanPurchase: {
     type: String,
+  },
+  PlanExpiredDate: {
+    type: String,
   }
 });
 
@@ -386,9 +395,6 @@ var PaymentSchema = new mongoose.Schema({
     type: String,
   },
   OffAmount: {
-    type: String,
-  },
-  Active: {
     type: String,
   }
 });
