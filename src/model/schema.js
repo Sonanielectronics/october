@@ -235,6 +235,7 @@ const ParkDetailSchema = new mongoose.Schema({
   CarPicture: Array,
   valetTicketPicture: Array,
   Parklocation: String,
+  UpdatedParklocation: String,
   CarBringer: String,
   CarParkBy: String,
   ParkInTime: String,

@@ -1093,6 +1093,7 @@ class class1 {
     //     }
     // };
     static i = async (req, res) => {
+
         try {
 
             if (req.files && req.UserName) {
@@ -1122,6 +1123,14 @@ class class1 {
 
                             var UserDataUsername = await response.data.message[0];
                             var UserData = await Todo.find({ UserName: UserDataUsername })
+
+                            var UpdatedParklocation = [];
+
+                            if (req.body.UpdatedParklocation) {
+                                await UpdatedParklocation.push(req.body.UpdatedParklocation)
+                            } else {
+                                await UpdatedParklocation.push(Parklocation)
+                            }
 
                             if (UserData[0].VehicleDetail) {
 
@@ -1209,6 +1218,7 @@ class class1 {
                                         Color: UserData[0].VehicleDetail[0].Color,
                                         CarPicture: locations,
                                         Parklocation: Parklocation,
+                                        UpdatedParklocation: UpdatedParklocation[0],
                                         CarBringer: req.body.CarBringer,
                                         CarParkBy: req.UserName,
                                         status: "",
@@ -1233,6 +1243,7 @@ class class1 {
                                         Color: UserData[0].VehicleDetail[1].Color,
                                         CarPicture: locations,
                                         Parklocation: Parklocation,
+                                        UpdatedParklocation: UpdatedParklocation[0],
                                         CarBringer: req.body.CarBringer,
                                         CarParkBy: req.UserName,
                                         status: "",
@@ -1510,7 +1521,7 @@ class class1 {
     static k = async (req, res) => {
         try {
 
-            if (req.UserName) {
+            if (req.UserName && req.body.RegistrationNumber) {
 
                 const headerValue = req.get('Authorization');
 
@@ -1521,6 +1532,13 @@ class class1 {
 
                         User.ValetStatus = 0;
                         await User.save();
+
+                        var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
+
+                        if (req.body.UpdatedParklocation) {
+                            ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
+                            await ParkedCar[ParkedCar.length - 1].save();
+                        }
 
                         var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(a);
@@ -3115,6 +3133,7 @@ class class1 {
                     const result = await myAsyncFunction();
 
                     User[i].WaitTime = result;
+                    // User[i].UpdatedParklocation = result;
                     await User[i].save();
 
                     await SendData.push(User[i]);
@@ -4066,6 +4085,7 @@ class class1 {
             for (var i = 0; i < Company.length; i++) {
                 await CompanyName.push(Company[i].CompanyName)
             }
+            await CompanyName.sort();
             var message2 = { "message": "Data Load Successfully", "data": CompanyName, "status": `${HTTP.SUCCESS}` }
             res.status(HTTP.SUCCESS).json(message2);
         } catch (e) {
@@ -4080,7 +4100,7 @@ class class1 {
             var Model = await Todo5.find({ CompanyName: req.body.CompanyName });
 
             var CompanyModel = await Model[0].Model;
-
+            await CompanyModel.sort();
             var message2 = { "message": "Data Load Successfully", "data": CompanyModel, "status": `${HTTP.SUCCESS}` }
             res.status(HTTP.SUCCESS).json(message2);
 
