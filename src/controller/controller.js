@@ -6104,10 +6104,112 @@ class class2 {
     static z = async (req, res) => {
         try {
 
-            var User2 = await Todo9.find({});
+            var SendData = await Todo9.find({});
+            var SendData2 = [];
 
-            var message = { "message": "Data Load Successfully", "data": User2, "status": `${HTTP.SUCCESS}` }
-            res.status(HTTP.SUCCESS).json(message);
+            if (req.Phone) {
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (User) {
+
+                    for(var i=0;i<SendData.length;i++){
+
+                        if(SendData[i].Plan == User.PlanPurchase){
+
+                            var a = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 1
+                            }
+
+                        }else{
+
+                            var a = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 0
+                            }
+
+                        }
+
+                        await SendData2.push(a);
+
+                    }
+
+                    var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(message);
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else if (req.UserName) {
+
+                var User = await Todo8.findOne({ Username: req.UserName })
+                var User2 = await Todo2.findOne({ UserName: req.UserName })
+
+                if (User) {
+                    var User3 = await User
+                } else {
+                    var User3 = await User2
+                }
+
+                if (User3) {
+
+                    for(var i=0;i<SendData.length;i++){
+
+                        if(SendData[i].Plan == User3.PlanPurchase){
+
+                            var a = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 1
+                            }
+
+                        }else{
+
+                            var a = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 0
+                            }
+
+                        }
+
+                        await SendData2.push(a);
+
+                    }
+
+                    var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(message);
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
 
         } catch (e) {
             console.log(e);
