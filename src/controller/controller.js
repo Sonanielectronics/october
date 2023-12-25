@@ -6101,7 +6101,20 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
+    static z = async (req, res) => {
+        try {
 
+            var User2 = await Todo9.find({});
+
+            var message = { "message": "Data Load Successfully", "data": User2, "status": `${HTTP.SUCCESS}` }
+            res.status(HTTP.SUCCESS).json(message);
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
 }
 
 module.exports = { class1, class2 };

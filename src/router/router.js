@@ -114,5 +114,6 @@ router.get("/Change" , class2.v);
 router.post("/Change", class2.w);
 router.get("/PaymentGet", verifyToken, class2.x);
 router.post("/PlanPurchaseByCustomer", verifyToken, class2.y);
+router.get("/PaymentGet2", class2.z);
 
 module.exports = router;
