@@ -5853,6 +5853,9 @@ class class2 {
     static x = async (req, res) => {
         try {
 
+            var SendData = await Todo9.find({});
+            var SendData2 = [];
+
             if (req.Phone) {
 
                 var User = await Todo.findOne({ Phone: req.Phone })
@@ -5899,26 +5902,59 @@ class class2 {
 
                     if (-1 < a) {
 
-                        var User2 = await Todo9.find({ Plan: User.PlanPurchase });
+                        for (var i = 0; i < SendData.length; i++) {
 
-                        var SendData = [];
+                            if (SendData[i].Plan == User.PlanPurchase) {
 
-                        var a = {
-                            "Plan": User2[User2.length - 1].Plan,
-                            "PlanAmount": User2[User2.length - 1].PlanAmount,
-                            "ActualPrice": User2[User2.length - 1].ActualPrice,
-                            "Message": User2[User2.length - 1].Message,
-                            "OffAmount": User2[User2.length - 1].OffAmount
+                                var ab = {
+                                    "Plan": SendData[i].Plan,
+                                    "PlanAmount": SendData[i].PlanAmount,
+                                    "ActualPrice": SendData[i].ActualPrice,
+                                    "Message": SendData[i].Message,
+                                    "OffAmount": SendData[i].OffAmount,
+                                    "Active": 1
+                                }
+
+                            } else {
+
+                                var ab = {
+                                    "Plan": SendData[i].Plan,
+                                    "PlanAmount": SendData[i].PlanAmount,
+                                    "ActualPrice": SendData[i].ActualPrice,
+                                    "Message": SendData[i].Message,
+                                    "OffAmount": SendData[i].OffAmount,
+                                    "Active": 0
+                                }
+
+                            }
+
+                            await SendData2.push(ab);
+
                         }
 
-                        await SendData.push(a);
-
-                        var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+                        var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(message);
 
                     } else {
-                        var a = { "message": "Plan expired", "status": `${HTTP.UNAUTHORIZED}` }
-                        res.status(HTTP.UNAUTHORIZED).json(a);
+
+                        for (var i = 0; i < SendData.length; i++) {
+
+                            var ab = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 0
+                            }
+
+                            await SendData2.push(ab);
+
+                        }
+
+                        var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message);
+
                     }
 
                 } else {
@@ -5940,8 +5976,6 @@ class class2 {
                 }
 
                 if (User3) {
-
-                    var User4 = await Todo9.find({ Plan: User3.PlanPurchase });
 
                     function compareDates(inputDate, inputDate2) {
 
@@ -5969,6 +6003,8 @@ class class2 {
 
                     }
 
+                    var User4 = await Todo9.find({ Plan: User3.PlanPurchase });
+
                     const inputDateTime = await User3.PlanExpiredDate;
 
                     const inputDateTime2 = new Date();
@@ -5982,25 +6018,60 @@ class class2 {
                     var a = await compareDates(inputDateTime, inputDateTime3);
 
                     if (-1 < a) {
+                       
+                        for (var i = 0; i < SendData.length; i++) {
 
-                        var SendData = [];
+                            if (SendData[i].Plan == User3.PlanPurchase) {
 
-                        var a = {
-                            "Plan": User4[User4.length - 1].Plan,
-                            "PlanAmount": User4[User4.length - 1].PlanAmount,
-                            "ActualPrice": User4[User4.length - 1].ActualPrice,
-                            "Message": User4[User4.length - 1].Message,
-                            "OffAmount": User4[User4.length - 1].OffAmount
+                                var ab = {
+                                    "Plan": SendData[i].Plan,
+                                    "PlanAmount": SendData[i].PlanAmount,
+                                    "ActualPrice": SendData[i].ActualPrice,
+                                    "Message": SendData[i].Message,
+                                    "OffAmount": SendData[i].OffAmount,
+                                    "Active": 1
+                                }
+
+                            } else {
+
+                                var ab = {
+                                    "Plan": SendData[i].Plan,
+                                    "PlanAmount": SendData[i].PlanAmount,
+                                    "ActualPrice": SendData[i].ActualPrice,
+                                    "Message": SendData[i].Message,
+                                    "OffAmount": SendData[i].OffAmount,
+                                    "Active": 0
+                                }
+
+                            }
+
+                            await SendData2.push(ab);
+
                         }
 
-                        await SendData.push(a);
-
-                        var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+                        var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(message);
 
                     } else {
-                        var a = { "message": "Plan expired", "status": `${HTTP.UNAUTHORIZED}` }
-                        res.status(HTTP.UNAUTHORIZED).json(a);
+
+                        for (var i = 0; i < SendData.length; i++) {
+
+                            var ab = {
+                                "Plan": SendData[i].Plan,
+                                "PlanAmount": SendData[i].PlanAmount,
+                                "ActualPrice": SendData[i].ActualPrice,
+                                "Message": SendData[i].Message,
+                                "OffAmount": SendData[i].OffAmount,
+                                "Active": 0
+                            }
+
+                            await SendData2.push(ab);
+
+                        }
+
+                        var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message);
+
                     }
 
                 } else {
@@ -6082,122 +6153,6 @@ class class2 {
 
                     var a = { "message": "Plan Purchase", "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(a);
-
-                } else {
-
-                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
-                    res.status(HTTP.NOT_FOUND).json(a);
-
-                }
-
-            } else {
-                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
-                res.status(HTTP.BAD_REQUEST).json(a);
-            }
-
-        } catch (e) {
-            console.log(e);
-            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
-            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
-        }
-    };
-    static z = async (req, res) => {
-        try {
-
-            var SendData = await Todo9.find({});
-            var SendData2 = [];
-
-            if (req.Phone) {
-
-                var User = await Todo.findOne({ Phone: req.Phone })
-
-                if (User) {
-
-                    for(var i=0;i<SendData.length;i++){
-
-                        if(SendData[i].Plan == User.PlanPurchase){
-
-                            var a = {
-                                "Plan": SendData[i].Plan,
-                                "PlanAmount": SendData[i].PlanAmount,
-                                "ActualPrice": SendData[i].ActualPrice,
-                                "Message": SendData[i].Message,
-                                "OffAmount": SendData[i].OffAmount,
-                                "Active": 1
-                            }
-
-                        }else{
-
-                            var a = {
-                                "Plan": SendData[i].Plan,
-                                "PlanAmount": SendData[i].PlanAmount,
-                                "ActualPrice": SendData[i].ActualPrice,
-                                "Message": SendData[i].Message,
-                                "OffAmount": SendData[i].OffAmount,
-                                "Active": 0
-                            }
-
-                        }
-
-                        await SendData2.push(a);
-
-                    }
-
-                    var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
-                    res.status(HTTP.SUCCESS).json(message);
-
-                } else {
-
-                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
-                    res.status(HTTP.NOT_FOUND).json(a);
-
-                }
-
-            } else if (req.UserName) {
-
-                var User = await Todo8.findOne({ Username: req.UserName })
-                var User2 = await Todo2.findOne({ UserName: req.UserName })
-
-                if (User) {
-                    var User3 = await User
-                } else {
-                    var User3 = await User2
-                }
-
-                if (User3) {
-
-                    for(var i=0;i<SendData.length;i++){
-
-                        if(SendData[i].Plan == User3.PlanPurchase){
-
-                            var a = {
-                                "Plan": SendData[i].Plan,
-                                "PlanAmount": SendData[i].PlanAmount,
-                                "ActualPrice": SendData[i].ActualPrice,
-                                "Message": SendData[i].Message,
-                                "OffAmount": SendData[i].OffAmount,
-                                "Active": 1
-                            }
-
-                        }else{
-
-                            var a = {
-                                "Plan": SendData[i].Plan,
-                                "PlanAmount": SendData[i].PlanAmount,
-                                "ActualPrice": SendData[i].ActualPrice,
-                                "Message": SendData[i].Message,
-                                "OffAmount": SendData[i].OffAmount,
-                                "Active": 0
-                            }
-
-                        }
-
-                        await SendData2.push(a);
-
-                    }
-
-                    var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
-                    res.status(HTTP.SUCCESS).json(message);
 
                 } else {
 
