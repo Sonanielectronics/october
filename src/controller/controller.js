@@ -5522,7 +5522,7 @@ class class2 {
                             SendData.push(User5[User5.length - 1]);
                         } else {
                             SendData.push({
-                                "TotleParkRRequestedLength"": 0
+                                "TotleParkRRequestedLength": 0
                             });
                         }
 
