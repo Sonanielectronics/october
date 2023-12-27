@@ -1671,7 +1671,10 @@ class class1 {
                                         fcm.sendMulticast(message2)
                                             .then((response) => {
 
-                                                var a = { "message": "User Can Send Request Sucessfully & Notification Send Sucessfully", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+                                                // var a = { "message": "User Can Send Request Sucessfully & Notification Send Sucessfully", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+                                                // res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+
+                                                var a = { "message": "User Request sent successfully to Valet for Acceptance", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
                                                 res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
 
                                             })
@@ -3902,7 +3905,10 @@ class class1 {
                                 fcm.sendMulticast(message2)
                                     .then((response) => {
 
-                                        var a = { "message": "Request Cancle Sucessfully & Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                                        // var a = { "message": "Request Cancle Sucessfully & Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                                        // res.status(HTTP.SUCCESS).json(a);
+
+                                        var a = { "message": "Request Cancelled Successfully", "status": `${HTTP.SUCCESS}` }
                                         res.status(HTTP.SUCCESS).json(a);
 
                                     })

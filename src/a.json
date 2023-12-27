@@ -1,0 +1,52 @@
+{
+    "message": "Data Load Successfully",
+    "data": {
+        "Parked": {
+            "Name1": "aveer_singh",
+            "Name2": "Ghoghari",
+            "RegistrationNumber": "GJ05HM7966",
+            "Make": "Audi",
+            "Model": "A3",
+            "TotleParkRRequestedLength": 2
+        },
+        "Requested": {
+            "Name1": "aveer_singh",
+            "Name2": "Ghoghari",
+            "RegistrationNumber": "GJ05HM7966",
+            "Make": "Audi",
+            "Time": "120",
+            "Model": "A3",
+            "Request": 1
+        },
+        "Valet": {
+            "_id": "657058fa2309b115898a491f",
+            "Username": "aveer_singh",
+            "Phone": 9428893063,
+            "Password": "$2a$12$7qDl92Xq1hbTkO.7wsKM3uT37tjav3lmqnfSFUhrq7oRkvvw1FpJ2",
+            "Name": "aveer",
+            "BusinessManagerUserName": "vijay_singh",
+            "BusinessUnitName": "The Oterra ",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImF2ZWVyX3NpbmdoIiwiaWF0IjoxNzAzNjQzOTg3fQ.cDcY0YMEsttBTroV_WVDN-9s-eb9VHmMOFpbE1hM9LI",
+            "Fcm": "fSQv9yWdSdyfesgV_7PLE3:APA91bHfWgQ8xRUKR6L8heN5bYjq622Cm90ZiAuXiuelcIsTv2RCZsAbLF7CczU0A3G_QjHQEkADBFLyTVXxU6b5OLta5Ebvms-g5mGvveIYhTL02heweQE5ehXAKF7l7K7Tc5b01I8S",
+            "ValetStatus": "0",
+            "Profile": [],
+            "__v": 0,
+            "PlanPurchase": "Single Payment",
+            "PlanExpiredDate": "2023-12-25",
+            "TotleParkRRequestedLength": "1"
+        },
+        "Intimate": {
+            "_id": "658b866c8014fea5dd9653c5",
+            "Date": "2023-12-30",
+            "Time": "20:35:00",
+            "NotiFicationGetTime": "02:05:32",
+            "NotiFicationGetDate": "2023:12:27",
+            "Phone": 9315100611,
+            "ReceiverUserName": "vijay_singh",
+            "SenderUserName": "Vikram Singh",
+            "__v": 0,
+            "TotleParkRRequestedLength": "1"
+        }
+    },
+    "status": "200"
+}

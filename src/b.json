@@ -1,0 +1,32 @@
+{
+    "message": "Data Load Successfully",
+    "data": {
+        "Parked": {
+            "TotleParkRRequestedLength": 0
+        },
+        "Requested": {
+            "TotleParkRRequestedLength": 0
+        },
+        "Valet": {
+            "_id": "6579c23bff789b9ae05d8144",
+            "Username": "jenil",
+            "Phone": 8320782320,
+            "Password": "$2a$12$qPXFd.14LuRU8sEBmNFcZ.qyrYXL47qRXHzZIgT7H42I9q6PFo8NW",
+            "Name": "jenil",
+            "BusinessManagerUserName": "ajay_singh",
+            "BusinessUnitName": "Hotel Crowne Plaza",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyTmFtZSI6ImplbmlsIiwiaWF0IjoxNzAyNDgwNjA0fQ.LOtFcsvxquYpb16ZjIWM7OOmTyG7PrsRkI6mRvDgYe8",
+            "Fcm": "c0Z7z3ZDQoGxupSqEi4dJo:APA91bFmpBtqCUkP3kmUe5-M7cTU-_lrD0Nirum8vwiwy9uyj3c1Ctjz-7XsmEDC4hahlLgSnQmqicVThRklipxBAciCtFd_1YSjghfKs-2kiY8bev-t26n61-PVZnZB1yMXqcGX4fFT",
+            "ValetStatus": "0",
+            "Profile": [],
+            "__v": 0,
+            "PlanPurchase": "Single Payment",
+            "PlanExpiredDate": "2023-12-20",
+            "TotleParkRRequestedLength": "1"
+        },
+        "Intimate": {
+            "TotleParkRRequestedLength": 0
+        }
+    },
+    "status": "200"
+}
