@@ -114,7 +114,7 @@ class class1 {
                                 ],
                                 TimeUpdateStatus: 0,
                                 Request: 0,
-                                PlanPurchase: "Single Payment",
+                                PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
                             })
                             await data.save();
@@ -128,7 +128,7 @@ class class1 {
                                 VehicleDetail: [],
                                 TimeUpdateStatus: 0,
                                 Request: 0,
-                                PlanPurchase: "Single Payment",
+                                PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
                             })
                             await data.save();
