@@ -4394,6 +4394,8 @@ class class2 {
 
             if (req.body.Date && req.Phone && req.body.Time && req.body.BusinessUserName) {
 
+                console.log(req.body.Time);
+                
                 const currentDate = new Date();
 
                 const year = currentDate.getFullYear();
