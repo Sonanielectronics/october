@@ -4040,7 +4040,10 @@ class class1 {
 
                     // Phase 4 complete // 
 
-                    var a = { "message": "Request Cancle Sucessfully & Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                    // var a = { "message": "Request Cancle Sucessfully & Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                    // res.status(HTTP.SUCCESS).json(a);
+
+                    var a = { "message": "Request Cancelled Successfully", "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(a);
 
                 } else {
@@ -6024,7 +6027,7 @@ class class2 {
                     var a = await compareDates(inputDateTime, inputDateTime3);
 
                     if (-1 < a) {
-                       
+
                         for (var i = 0; i < SendData.length; i++) {
 
                             if (SendData[i].Plan == User3.PlanPurchase) {

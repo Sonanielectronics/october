@@ -802,7 +802,14 @@
         await formData.append('picture', file[i]);
       }
 
-      fetch('CreateBusiness', {
+      if(file.length == 0){
+
+        // alert("Please Upload Picture");
+        alert("Please Upload Display Picture");
+
+      }else{
+
+        fetch('CreateBusiness', {
         method: 'POST',
         body: formData,
       })
@@ -819,6 +826,8 @@
           console.error('Error sending data to server:', error);
           alert("Does Not Create Business Account");
         });
+
+      }
 
       // const url = 'CreateBusiness';
       // const data = {
