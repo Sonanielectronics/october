@@ -1537,34 +1537,34 @@ class class1 {
                 if (User) {
                     if (User.token == headerValue) {
 
-                        const postData = {
-                            RegistrationNumber: req.body.RegistrationNumber,
-                            Status: "Parked",
-                            Status2: "Parked",
-                        };
+                        async function myAsyncFunction() {
 
-                        axios.post(`${Ip}/StatusChange`, postData)
-                            .then(response => {
+                            const postData = {
+                                RegistrationNumber: req.body.RegistrationNumber,
+                                Status: "Parked",
+                                Status2: "Parked",
+                            };
 
-                                User.ValetStatus = 0;
-                                await User.save();
+                            await axios.post(`${Ip}/StatusChange`, postData);
 
-                                var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
+                            User.ValetStatus = 0;
+                            await User.save();
 
-                                if (req.body.UpdatedParklocation) {
-                                    ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
-                                }
+                            var ParkedCar = Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
 
-                                ParkedCar[ParkedCar.length - 1].status2 = "Parked";
-                                await ParkedCar[ParkedCar.length - 1].save();
+                            if (req.body.UpdatedParklocation) {
+                                ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
+                            }
 
-                                var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
-                                res.status(HTTP.SUCCESS).json(a);
+                            ParkedCar[ParkedCar.length - 1].status2 = "Parked";
+                            await ParkedCar[ParkedCar.length - 1].save();
 
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
+                            var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
+                            res.status(HTTP.SUCCESS).json(a);
+
+                        }
+
+                        await myAsyncFunction();
 
                     } else {
                         var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
