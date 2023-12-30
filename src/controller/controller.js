@@ -394,6 +394,7 @@ class class1 {
                             Model: req.body.Model,
                             RegistrationNumber: req.body.RegistrationNumber,
                             status: "",
+                            status2:"",
                             Color: req.body.Color,
                             Year: req.body.Year,
                             BodyType: req.body.BodyType,
