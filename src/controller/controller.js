@@ -3565,6 +3565,9 @@ class class1 {
                     var message2 = { "message": "Valid Car", "data": data, "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(message2);
                 } else {
+
+                    console.log("Hey");
+                    
                     var message2 = { "message": "InValid Car", "status": `${HTTP.NOT_FOUND}` }
                     res.status(HTTP.NOT_FOUND).json(message2);
                 }
