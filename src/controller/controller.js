@@ -1436,7 +1436,7 @@ class class1 {
                             ParkedCar1[0].valetTicketPicture = locations;
                             ParkedCar1[0].ParkInTime = currentTimeInSurat;
                             ParkedCar1[0].status = "Parked";
-                            ParkedCar1[0].status2 = "Parked";
+                            // ParkedCar1[0].status2 = "Parked";
                             ParkedCar1[0].CarPictureUploadStatus = "0"
                             ParkedCar1[0].save();
 
@@ -1543,8 +1543,10 @@ class class1 {
 
                         if (req.body.UpdatedParklocation) {
                             ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
-                            await ParkedCar[ParkedCar.length - 1].save();
                         }
+
+                        ParkedCar[ParkedCar.length - 1].status2 = "Parked";
+                        await ParkedCar[ParkedCar.length - 1].save();
 
                         var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(a);
@@ -1562,6 +1564,7 @@ class class1 {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
                 res.status(HTTP.BAD_REQUEST).json(a);
             }
+
         } catch (e) {
             console.log(e);
             var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
@@ -3562,8 +3565,6 @@ class class1 {
 
                     var data = Vehicles2[index];
 
-                    console.log("Hello");
-
                     var message2 = { "message": "Valid Car", "data": data, "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(message2);
                 } else {
@@ -3984,7 +3985,7 @@ class class1 {
 
                         ParkedCar[ParkedCar.length - 1].UserWaitTime = [];
                         ParkedCar[ParkedCar.length - 1].status = 'Parked';
-                        ParkedCar[ParkedCar.length - 1].status2 = 'Parked';
+                        ParkedCar[ParkedCar.length - 1].status2 = '';
                         ParkedCar[ParkedCar.length - 1].TimeUpdateStatus = 0;
                         await ParkedCar[ParkedCar.length - 1].save();
 
@@ -4104,7 +4105,7 @@ class class1 {
 
                     ParkedCar[ParkedCar.length - 1].UserWaitTime = [];
                     ParkedCar[ParkedCar.length - 1].status = 'Parked';
-                    ParkedCar[ParkedCar.length - 1].status2 = 'Parked';
+                    ParkedCar[ParkedCar.length - 1].status2 = '';
                     ParkedCar[ParkedCar.length - 1].TimeUpdateStatus = 0;
                     await ParkedCar[ParkedCar.length - 1].save();
 
