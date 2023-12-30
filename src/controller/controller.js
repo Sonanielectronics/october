@@ -1420,6 +1420,7 @@ class class1 {
                         const postData = {
                             RegistrationNumber: req.body.RegistrationNumber,
                             Status: "Parked",
+                            Status2: "",
                         };
 
                         var ParkedCar1 = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "", CarPictureUploadStatus: "1" })
@@ -1536,20 +1537,34 @@ class class1 {
                 if (User) {
                     if (User.token == headerValue) {
 
-                        User.ValetStatus = 0;
-                        await User.save();
+                        const postData = {
+                            RegistrationNumber: req.body.RegistrationNumber,
+                            Status: "Parked",
+                            Status2: "Parked",
+                        };
 
-                        var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
+                        axios.post(`${Ip}/StatusChange`, postData)
+                            .then(response => {
 
-                        if (req.body.UpdatedParklocation) {
-                            ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
-                        }
+                                User.ValetStatus = 0;
+                                await User.save();
 
-                        ParkedCar[ParkedCar.length - 1].status2 = "Parked";
-                        await ParkedCar[ParkedCar.length - 1].save();
+                                var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
 
-                        var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
-                        res.status(HTTP.SUCCESS).json(a);
+                                if (req.body.UpdatedParklocation) {
+                                    ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
+                                }
+
+                                ParkedCar[ParkedCar.length - 1].status2 = "Parked";
+                                await ParkedCar[ParkedCar.length - 1].save();
+
+                                var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
+                                res.status(HTTP.SUCCESS).json(a);
+
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
 
                     } else {
                         var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
@@ -3197,7 +3212,7 @@ class class1 {
 
                 transformedData.sort((a, b) => a.kilometer - b.kilometer);
 
-                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3}
+                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3 }
                 res.status(HTTP.SUCCESS).json({ message });
 
             } else {
@@ -3568,7 +3583,7 @@ class class1 {
                     var message2 = { "message": "Valid Car", "data": data, "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(message2);
                 } else {
-                    
+
                     var message2 = { "message": "InValid Car", "status": `${HTTP.NOT_FOUND}` }
                     res.status(HTTP.NOT_FOUND).json(message2);
                 }
@@ -3597,7 +3612,11 @@ class class1 {
                         if (User[i].VehicleDetail[0].RegistrationNumber == req.body.RegistrationNumber) {
 
                             User[i].VehicleDetail[0].status = req.body.Status;
-                            User[i].VehicleDetail[0].status2 = req.body.Status;
+
+                            if(req.body.Status2){
+                                User[i].VehicleDetail[0].status2 = req.body.Status2;
+                            }
+                            
                             await User[i].save();
 
                         }
@@ -3609,7 +3628,11 @@ class class1 {
                         if (User[i].VehicleDetail[1].RegistrationNumber == req.body.RegistrationNumber) {
 
                             User[i].VehicleDetail[1].status = req.body.Status;
-                            User[i].VehicleDetail[1].status2 = req.body.Status;
+
+                            if(req.body.Status2){
+                                User[i].VehicleDetail[1].status2 = req.body.Status2;
+                            }
+
                             await User[i].save();
 
                         }
@@ -3992,6 +4015,7 @@ class class1 {
                         const postData = {
                             RegistrationNumber: req.body.RegistrationNumber,
                             Status: "Parked",
+                            Status2: "",
                         };
 
                         var User1 = await Todo8.find({ Username: ParkedCar[0].CarParkBy })
@@ -4115,6 +4139,7 @@ class class1 {
                     const postData2 = {
                         RegistrationNumber: req.body.RegistrationNumber,
                         Status: "Parked",
+                        Status2: "",
                     };
 
                     await axios.post(`${Ip}/StatusChange`, postData2);
