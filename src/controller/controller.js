@@ -1555,6 +1555,8 @@ class class1 {
 
                             if (req.body.UpdatedParklocation) {
                                 ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
+                            } else {
+                                await UpdatedParklocation.push(Parklocation)
                             }
 
                             ParkedCar[ParkedCar.length - 1].status2 = "Parked";
