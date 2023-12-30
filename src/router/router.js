@@ -68,8 +68,8 @@ router.get("/Mall", class1.D);
 router.get("/Mall/:id1/:id2/:id3", class1.E);
 router.get("/Other", class1.F);
 router.get("/Other/:id1/:id2/:id3", class1.G);
-router.post("/location", class1.H);
-router.post("/location2", class1.I);
+router.post("/location", verifyToken, class1.H);
+router.post("/location2", verifyToken, class1.I);
 router.get("/CustomerRequest", verifyToken, class1.J);
 router.get("/AcceptedCustomerRequest", verifyToken, class1.K);  
 router.post("/CustomerRequestByRegistrationNumber", verifyToken, class1.L);
@@ -114,5 +114,4 @@ router.get("/Change" , class2.v);
 router.post("/Change", class2.w);
 router.get("/PaymentGet", verifyToken, class2.x);
 router.post("/PlanPurchaseByCustomer", verifyToken, class2.y);
-
 module.exports = router;

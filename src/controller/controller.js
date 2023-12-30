@@ -116,6 +116,7 @@ class class1 {
                                 Request: 0,
                                 PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
+                                OfficialPlanExpiredDate: ""
                             })
                             await data.save();
 
@@ -130,6 +131,7 @@ class class1 {
                                 Request: 0,
                                 PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
+                                OfficialPlanExpiredDate: ""
                             })
                             await data.save();
 
@@ -674,6 +676,7 @@ class class1 {
                             CarParkBy: req.UserName,
                             ParkInTime: currentTimeInSurat,
                             status: "Parked",
+                            status2: "Parked",
                             UserWaitTime: [],
                             TimeUpdateStatus: 0,
                             Member: response.data.message,
@@ -1431,6 +1434,7 @@ class class1 {
                             ParkedCar1[0].valetTicketPicture = locations;
                             ParkedCar1[0].ParkInTime = currentTimeInSurat;
                             ParkedCar1[0].status = "Parked";
+                            ParkedCar1[0].status2 = "Parked";
                             ParkedCar1[0].CarPictureUploadStatus = "0"
                             ParkedCar1[0].save();
 
@@ -1610,6 +1614,7 @@ class class1 {
 
                         ParkedCar[0].UserWaitTime[0] = result.message;
                         ParkedCar[0].status = 'Requested';
+                        ParkedCar[0].status2 = 'Requested';
                         await ParkedCar[0].save();
 
                         var NotificationUserFcm = await ParkedCar[0].CarParkBy;
@@ -1754,6 +1759,7 @@ class class1 {
 
                         ParkedCar[0].RequestTimeDate = req.body.Date;  // 3
                         ParkedCar[0].status = req.body.Action;
+                        ParkedCar[0].status2 = req.body.Action;
                         await ParkedCar[0].save();
 
                         const postData = {
@@ -2993,6 +2999,53 @@ class class1 {
             if (req.body.latitude && req.body.longitude) {
                 const data = await Todo2.find({});
 
+                function compareDates(inputDate, inputDate2) {
+
+                    const inputDateTime = new Date(inputDate);
+                    const inputDateTime2 = new Date(inputDate2);
+
+                    const inputYear = inputDateTime.getFullYear();
+                    const inputMonth = inputDateTime.getMonth() + 1;
+                    const inputDay = inputDateTime.getDate();
+
+                    const inputYear2 = inputDateTime2.getFullYear();
+                    const inputMonth2 = inputDateTime2.getMonth() + 1;
+                    const inputDay2 = inputDateTime2.getDate();
+
+                    if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
+                        //   return "Future"
+                        return 1
+                    } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
+                        //   return "Current"
+                        return 0
+                    } else {
+                        //   return "Past"
+                        return -1
+                    }
+
+                }
+
+                const data2 = await Todo.find({ Phone: req.Phone });
+
+                const inputDateTime = await data2[0].PlanExpiredDate;
+
+                const inputDateTime2 = new Date();
+
+                const year = inputDateTime2.getFullYear();
+                const month = inputDateTime2.getMonth() + 1;
+                const day = inputDateTime2.getDate();
+
+                let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                var a = await compareDates(inputDateTime, inputDateTime3);
+
+                var Data3
+                if (-1 < a) {
+                    Data3 = 1;
+                } else {
+                    Data3 = 0;
+                }
+
                 const transformedData = data.map(item => ({
                     _id: item._id.toString(),
                     UserName: item.UserName,
@@ -3009,7 +3062,8 @@ class class1 {
                         latitude: parseFloat(item.latitude),
                         longitude: parseFloat(item.longitude)
                     },
-                    __v: item.__v
+                    __v: item.__v,
+                    Active: Data3
                 }));
 
                 const targetLocation = req.body;
@@ -3030,7 +3084,7 @@ class class1 {
 
                 }
 
-                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}` }
+                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3 }
                 res.status(HTTP.SUCCESS).json({ message });
 
             } else {
@@ -3049,6 +3103,53 @@ class class1 {
             if (req.body.latitude && req.body.longitude) {
                 const data = await Todo2.find({});
 
+                function compareDates(inputDate, inputDate2) {
+
+                    const inputDateTime = new Date(inputDate);
+                    const inputDateTime2 = new Date(inputDate2);
+
+                    const inputYear = inputDateTime.getFullYear();
+                    const inputMonth = inputDateTime.getMonth() + 1;
+                    const inputDay = inputDateTime.getDate();
+
+                    const inputYear2 = inputDateTime2.getFullYear();
+                    const inputMonth2 = inputDateTime2.getMonth() + 1;
+                    const inputDay2 = inputDateTime2.getDate();
+
+                    if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
+                        //   return "Future"
+                        return 1
+                    } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
+                        //   return "Current"
+                        return 0
+                    } else {
+                        //   return "Past"
+                        return -1
+                    }
+
+                }
+
+                const data2 = await Todo.find({ Phone: req.Phone });
+
+                const inputDateTime = await data2[0].PlanExpiredDate;
+
+                const inputDateTime2 = new Date();
+
+                const year = inputDateTime2.getFullYear();
+                const month = inputDateTime2.getMonth() + 1;
+                const day = inputDateTime2.getDate();
+
+                let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                var a = await compareDates(inputDateTime, inputDateTime3);
+
+                var Data3
+                if (-1 < a) {
+                    Data3 = 1;
+                } else {
+                    Data3 = 0;
+                }
+
                 const transformedData = data.map(item => ({
                     _id: item._id.toString(),
                     UserName: item.UserName,
@@ -3065,7 +3166,8 @@ class class1 {
                         latitude: parseFloat(item.latitude),
                         longitude: parseFloat(item.longitude)
                     },
-                    __v: item.__v
+                    __v: item.__v,
+                    Active: Data3
                 }));
 
                 const targetLocation = req.body;
@@ -3090,7 +3192,7 @@ class class1 {
 
                 transformedData.sort((a, b) => a.kilometer - b.kilometer);
 
-                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}` }
+                const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3}
                 res.status(HTTP.SUCCESS).json({ message });
 
             } else {
@@ -3489,6 +3591,7 @@ class class1 {
                         if (User[i].VehicleDetail[0].RegistrationNumber == req.body.RegistrationNumber) {
 
                             User[i].VehicleDetail[0].status = req.body.Status;
+                            User[i].VehicleDetail[0].status2 = req.body.Status;
                             await User[i].save();
 
                         }
@@ -3500,6 +3603,7 @@ class class1 {
                         if (User[i].VehicleDetail[1].RegistrationNumber == req.body.RegistrationNumber) {
 
                             User[i].VehicleDetail[1].status = req.body.Status;
+                            User[i].VehicleDetail[1].status2 = req.body.Status;
                             await User[i].save();
 
                         }
@@ -3732,7 +3836,8 @@ class class1 {
                             CarPickBy: req.body.CarPickBy,
                             CarDeliverkBy: req.UserName,
                             ParkOutTime: formattedDateTime,
-                            status: "Deliver"
+                            status: "Deliver",
+                            status2: "Deliver"
                         }
                     }, { returnOriginal: false })
 
@@ -3874,6 +3979,7 @@ class class1 {
 
                         ParkedCar[ParkedCar.length - 1].UserWaitTime = [];
                         ParkedCar[ParkedCar.length - 1].status = 'Parked';
+                        ParkedCar[ParkedCar.length - 1].status2 = 'Parked';
                         ParkedCar[ParkedCar.length - 1].TimeUpdateStatus = 0;
                         await ParkedCar[ParkedCar.length - 1].save();
 
@@ -3993,6 +4099,7 @@ class class1 {
 
                     ParkedCar[ParkedCar.length - 1].UserWaitTime = [];
                     ParkedCar[ParkedCar.length - 1].status = 'Parked';
+                    ParkedCar[ParkedCar.length - 1].status2 = 'Parked';
                     ParkedCar[ParkedCar.length - 1].TimeUpdateStatus = 0;
                     await ParkedCar[ParkedCar.length - 1].save();
 
@@ -4395,7 +4502,7 @@ class class2 {
             if (req.body.Date && req.Phone && req.body.Time && req.body.BusinessUserName) {
 
                 console.log(req.body.Time);
-                
+
                 const currentDate = new Date();
 
                 const year = currentDate.getFullYear();
@@ -6131,6 +6238,7 @@ class class2 {
 
                     User.PlanPurchase = req.body.PlanType;
                     User.PlanExpiredDate = await PlanExpiredDate;
+                    User.OfficialPlanExpiredDate = await PlanExpiredDate;
 
                     await User.save();
 
@@ -6159,6 +6267,7 @@ class class2 {
 
                     User3.PlanPurchase = req.body.PlanType;
                     User3.PlanExpiredDate = await PlanExpiredDate;
+                    User3.OfficialPlanExpiredDate = await PlanExpiredDate;
 
                     await User3.save();
 

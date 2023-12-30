@@ -24,6 +24,7 @@ var UserSchema = new mongoose.Schema({
     Color: String,
     Picture: Array,
     status: String,
+    status2: String,
     Member: Array
   }],
   Member:Array,
@@ -52,6 +53,9 @@ var UserSchema = new mongoose.Schema({
     type: String,
   },
   PlanExpiredDate: {
+    type: String,
+  },
+  OfficialPlanExpiredDate: {
     type: String,
   }
 });
@@ -240,6 +244,7 @@ const ParkDetailSchema = new mongoose.Schema({
   CarParkBy: String,
   ParkInTime: String,
   status: String,
+  status2: String,
   UserWaitTime: Array,
   CarDeliverPicture: Array,
   valetDeliverTicketPicture: Array,
