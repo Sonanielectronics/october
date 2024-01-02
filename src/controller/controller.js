@@ -1589,19 +1589,14 @@ class class1 {
                                 ParkedCar[ParkedCar.length - 1].status2 = "Parked";
                                 await ParkedCar[ParkedCar.length - 1].save();
     
-                                var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
-                                res.status(HTTP.SUCCESS).json(a);
-    
                             }
     
                             await myAsyncFunction();
 
-                        }else{
-
-                            var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
-                            res.status(HTTP.SUCCESS).json(a);
-                            
                         }
+
+                        var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(a);
 
                     } else {
                         var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
