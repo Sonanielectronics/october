@@ -1537,43 +1537,71 @@ class class1 {
 
                 if (User) {
                     if (User.token == headerValue) {
+                        
+                        const postData = {
+                            RegistrationNumber: req.body.RegistrationNumber,
+                        };
 
-                        // if(req.body.status == "Parked" & req.body.status2== "Parked"){
+                        const response = await axios.post(`${Ip}/NumberToMember`, postData);
 
-                        // }else{
+                        var UserDataUsername = await response.data.message[0];
 
-                        // }
+                        var FcmTokenUser = await Todo.find({ UserName: UserDataUsername })
 
-                        async function myAsyncFunction() {
+                        var ParkedStatus = "";
+                        var ParkedStatus2 = "";
 
-                            const postData = {
-                                RegistrationNumber: req.body.RegistrationNumber,
-                                Status: "Parked",
-                                Status2: "Parked",
-                            };
+                        if(FcmTokenUser[0].VehicleDetail){
 
-                            // await axios.post(`${Ip}/StatusChange`, postData);
-
-                            // User.ValetStatus = 0;
-                            // await User.save();
-
-                            var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
-
-                            if (req.body.UpdatedParklocation) {
-                                ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
-                            } else {
-                                await UpdatedParklocation.push(Parklocation)
+                            if(FcmTokenUser[0].VehicleDetail[0].RegistrationNumber == req.body.RegistrationNumber){
+                                var ParkedStatus = FcmTokenUser[0].VehicleDetail[0].status;
+                                var ParkedStatus2 = FcmTokenUser[0].VehicleDetail[0].status2;
+                            }else{
+                                var ParkedStatus = FcmTokenUser[0].VehicleDetail[1].status;
+                                var ParkedStatus2 = FcmTokenUser[0].VehicleDetail[1].status2;
                             }
-
-                            ParkedCar[ParkedCar.length - 1].status2 = "Parked";
-                            await ParkedCar[ParkedCar.length - 1].save();
-
-                            var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
-                            res.status(HTTP.SUCCESS).json(a);
 
                         }
 
-                        await myAsyncFunction();
+                        if(ParkedStatus == "Parked" & ParkedStatus2 == "Parked"){
+                        
+                            async function myAsyncFunction() {
+
+                                const postData = {
+                                    RegistrationNumber: req.body.RegistrationNumber,
+                                    Status: "Parked",
+                                    Status2: "Parked",
+                                };
+    
+                                await axios.post(`${Ip}/StatusChange`, postData);
+    
+                                User.ValetStatus = 0;
+                                await User.save();
+    
+                                var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
+    
+                                if (req.body.UpdatedParklocation) {
+                                    ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
+                                } else {
+                                    await UpdatedParklocation.push(Parklocation)
+                                }
+    
+                                ParkedCar[ParkedCar.length - 1].status2 = "Parked";
+                                await ParkedCar[ParkedCar.length - 1].save();
+    
+                                var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
+                                res.status(HTTP.SUCCESS).json(a);
+    
+                            }
+    
+                            await myAsyncFunction();
+
+                        }else{
+
+                            var a = { "message": "Valet Status Update", "status": `${HTTP.SUCCESS}` }
+                            res.status(HTTP.SUCCESS).json(a);
+                            
+                        }
 
                     } else {
                         var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
