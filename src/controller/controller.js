@@ -1538,6 +1538,12 @@ class class1 {
                 if (User) {
                     if (User.token == headerValue) {
 
+                        // if(req.body.status == "Parked" & req.body.status2== "Parked"){
+
+                        // }else{
+
+                        // }
+
                         async function myAsyncFunction() {
 
                             const postData = {
@@ -1546,12 +1552,12 @@ class class1 {
                                 Status2: "Parked",
                             };
 
-                            await axios.post(`${Ip}/StatusChange`, postData);
+                            // await axios.post(`${Ip}/StatusChange`, postData);
 
-                            User.ValetStatus = 0;
-                            await User.save();
+                            // User.ValetStatus = 0;
+                            // await User.save();
 
-                            var ParkedCar = Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
+                            var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber })
 
                             if (req.body.UpdatedParklocation) {
                                 ParkedCar[ParkedCar.length - 1].UpdatedParklocation = req.body.UpdatedParklocation;
@@ -6314,6 +6320,49 @@ class class2 {
                     res.status(HTTP.NOT_FOUND).json(a);
 
                 }
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static z = async (req, res) => {
+        try {
+
+            if (req.Phone) {
+
+                const headerValue = req.get('Authorization');
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (headerValue == User.token) {
+
+                    var FindAndDeleteMany = await Todo7.find({ UserName: User.UserName });
+
+                    for(var i=0;i<FindAndDeleteMany.length;i++){
+
+                        if(FindAndDeleteMany[i].NotificationRemainingTime){
+                        }else{
+                            await FindAndDeleteMany[i].deleteOne();
+                        }
+
+                    }
+
+                    var message = { "message": "Delete All Notification Successfully", "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(message);
+
+                } else {
+                    var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                    res.status(HTTP.UNAUTHORIZED).json(a);
+                }
+
+
 
             } else {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
