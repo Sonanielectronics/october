@@ -4921,9 +4921,9 @@ class class2 {
                             const hashedPassword = await bcrypt.hash(req.body.Password, 12);
                             var UnitName = User[0].UnitName;
                             let data = new Todo8({
-                                Name: req.body.Name,
+                                Name: LowerCaseUsername,
                                 Phone: req.body.Phone,
-                                Username: LowerCaseUsername,
+                                Username: req.body.Name,
                                 Password: hashedPassword,
                                 BusinessManagerUserName: req.UserName,
                                 BusinessUnitName: UnitName,
