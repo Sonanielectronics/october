@@ -5248,11 +5248,12 @@ class class2 {
 
                 const headerValue = req.get('Authorization');
 
-                // var User = await Todo.findOne({ Phone: req.Phone })
-                var User = await Todo2.findOne({ UserName : "vijay_singh" })
+                var User = await Todo.findOne({ Phone: req.Phone })
 
                 if (headerValue == User.token) {
 
+                    var User = await Todo2.findOne({ UserName : "vijay_singh" })
+                    
                     var User2 = await Todo7.find({ UserName: User.UserName, ParkInTime: { $ne: "" } })
 
                     var User3 = [];
