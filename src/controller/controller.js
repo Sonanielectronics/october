@@ -1549,16 +1549,13 @@ class class1 {
                         var FcmTokenUser = await Todo.find({ UserName: UserDataUsername })
 
                         var ParkedStatus = "";
-                        var ParkedStatus2 = "";
 
                         if(FcmTokenUser[0].VehicleDetail){
 
                             if(FcmTokenUser[0].VehicleDetail[0].RegistrationNumber == req.body.RegistrationNumber){
                                 var ParkedStatus = FcmTokenUser[0].VehicleDetail[0].status;
-                                var ParkedStatus2 = FcmTokenUser[0].VehicleDetail[0].status2;
                             }else{
                                 var ParkedStatus = FcmTokenUser[0].VehicleDetail[1].status;
-                                var ParkedStatus2 = FcmTokenUser[0].VehicleDetail[1].status2;
                             }
 
                         }
