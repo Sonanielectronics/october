@@ -1560,7 +1560,7 @@ class class1 {
 
                         }
 
-                        if(ParkedStatus == "Parked" & ParkedStatus2 == "Parked"){
+                        if(ParkedStatus == "Parked"){
                         
                             async function myAsyncFunction() {
 
