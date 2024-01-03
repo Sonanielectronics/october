@@ -3171,99 +3171,99 @@ class class1 {
 
                 if (headerValue == PetLogic3.token) {
 
-                        const data = await Todo2.find({});
-        
-                        function compareDates(inputDate, inputDate2) {
-        
-                            const inputDateTime = new Date(inputDate);
-                            const inputDateTime2 = new Date(inputDate2);
-        
-                            const inputYear = inputDateTime.getFullYear();
-                            const inputMonth = inputDateTime.getMonth() + 1;
-                            const inputDay = inputDateTime.getDate();
-        
-                            const inputYear2 = inputDateTime2.getFullYear();
-                            const inputMonth2 = inputDateTime2.getMonth() + 1;
-                            const inputDay2 = inputDateTime2.getDate();
-        
-                            if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
-                                //   return "Future"
-                                return 1
-                            } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
-                                //   return "Current"
-                                return 0
-                            } else {
-                                //   return "Past"
-                                return -1
-                            }
-        
-                        }
-        
-                        const data2 = await Todo.find({ Phone: req.Phone });
-        
-                        const inputDateTime = await data2[0].PlanExpiredDate;
-        
-                        const inputDateTime2 = new Date();
-        
-                        const year = inputDateTime2.getFullYear();
-                        const month = inputDateTime2.getMonth() + 1;
-                        const day = inputDateTime2.getDate();
-        
-                        let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-        
-                        var a = await compareDates(inputDateTime, inputDateTime3);
-        
-                        var Data3
-                        if (-1 < a) {
-                            Data3 = 1;
+                    const data = await Todo2.find({});
+
+                    function compareDates(inputDate, inputDate2) {
+
+                        const inputDateTime = new Date(inputDate);
+                        const inputDateTime2 = new Date(inputDate2);
+
+                        const inputYear = inputDateTime.getFullYear();
+                        const inputMonth = inputDateTime.getMonth() + 1;
+                        const inputDay = inputDateTime.getDate();
+
+                        const inputYear2 = inputDateTime2.getFullYear();
+                        const inputMonth2 = inputDateTime2.getMonth() + 1;
+                        const inputDay2 = inputDateTime2.getDate();
+
+                        if (inputYear > inputYear2 || (inputYear === inputYear2 && inputMonth > inputMonth2) || (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay > inputDay2)) {
+                            //   return "Future"
+                            return 1
+                        } else if (inputYear === inputYear2 && inputMonth === inputMonth2 && inputDay === inputDay2) {
+                            //   return "Current"
+                            return 0
                         } else {
-                            Data3 = 0;
+                            //   return "Past"
+                            return -1
                         }
-        
-                        const transformedData = data.map(item => ({
-                            _id: item._id.toString(),
-                            UserName: item.UserName,
-                            ManagerName: item.ManagerName,
-                            ManagerDestination: item.ManagerDestination,
-                            PassWord: item.PassWord,
-                            UnitName: item.UnitName,
-                            UnitType: item.UnitType,
-                            UnitAddress: item.UnitAddress,
-                            Profile: item.Profile,
-                            Rating: item.Rating,
-                            Review: item.Review,
-                            location: {
-                                latitude: parseFloat(item.latitude),
-                                longitude: parseFloat(item.longitude)
-                            },
-                            __v: item.__v,
-                            Active: Data3
-                        }));
-        
-                        const targetLocation = req.body;
-        
-                        transformedData.forEach((element) => {
-                            element.kilometer = geolib.getDistance(targetLocation, element.location) / 1000;
-                        });
-        
-                        var DataArray = [];
-        
-                        for (var i = 0; i < transformedData.length; i++) {
-        
-                            if (transformedData[i].kilometer <= 100) {
-        
-                                if (2 < transformedData[i].kilometer) {
-                                    await DataArray.push(transformedData[i]);
-                                }
-        
+
+                    }
+
+                    const data2 = await Todo.find({ Phone: req.Phone });
+
+                    const inputDateTime = await data2[0].PlanExpiredDate;
+
+                    const inputDateTime2 = new Date();
+
+                    const year = inputDateTime2.getFullYear();
+                    const month = inputDateTime2.getMonth() + 1;
+                    const day = inputDateTime2.getDate();
+
+                    let inputDateTime3 = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                    var a = await compareDates(inputDateTime, inputDateTime3);
+
+                    var Data3
+                    if (-1 < a) {
+                        Data3 = 1;
+                    } else {
+                        Data3 = 0;
+                    }
+
+                    const transformedData = data.map(item => ({
+                        _id: item._id.toString(),
+                        UserName: item.UserName,
+                        ManagerName: item.ManagerName,
+                        ManagerDestination: item.ManagerDestination,
+                        PassWord: item.PassWord,
+                        UnitName: item.UnitName,
+                        UnitType: item.UnitType,
+                        UnitAddress: item.UnitAddress,
+                        Profile: item.Profile,
+                        Rating: item.Rating,
+                        Review: item.Review,
+                        location: {
+                            latitude: parseFloat(item.latitude),
+                            longitude: parseFloat(item.longitude)
+                        },
+                        __v: item.__v,
+                        Active: Data3
+                    }));
+
+                    const targetLocation = req.body;
+
+                    transformedData.forEach((element) => {
+                        element.kilometer = geolib.getDistance(targetLocation, element.location) / 1000;
+                    });
+
+                    var DataArray = [];
+
+                    for (var i = 0; i < transformedData.length; i++) {
+
+                        if (transformedData[i].kilometer <= 100) {
+
+                            if (2 < transformedData[i].kilometer) {
+                                await DataArray.push(transformedData[i]);
                             }
-        
+
                         }
-        
-                        transformedData.sort((a, b) => a.kilometer - b.kilometer);
-        
-                        const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3 }
-                        res.status(HTTP.SUCCESS).json({ message });
+
+                    }
+
+                    transformedData.sort((a, b) => a.kilometer - b.kilometer);
+
+                    const message = { "data": DataArray, "status": `${HTTP.SUCCESS}`, "Active": Data3 }
+                    res.status(HTTP.SUCCESS).json({ message });
 
                 } else {
                     var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
@@ -4722,19 +4722,30 @@ class class2 {
     static e = async (req, res) => {
         try {
 
-            if (req.UserName) {
+            var User = await Todo2.findOne({ UserName: req.UserName })
+            var User2 = await Todo8.findOne({ Username: req.UserName })
 
-                var User = await Todo2.findOne({ UserName: req.UserName })
-                var User2 = await Todo8.findOne({ Username: req.UserName })
+            if (User) {
+                var User3 = await User
+            } else {
+                var User3 = await User2
+            }
 
-                if (User) {
-                    var SendData = [User];
+            if (req.UserName && User3) {
+
+                const headerValue = req.get('Authorization');
+
+                if (headerValue == User3.token) {
+
+                    var SendData = [User3];
+
+                    var message2 = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(message2);
+
                 } else {
-                    var SendData = [User2];
+                    var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                    res.status(HTTP.UNAUTHORIZED).json(a);
                 }
-
-                var message2 = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
-                res.status(HTTP.SUCCESS).json(message2);
 
             } else {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
