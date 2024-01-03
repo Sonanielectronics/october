@@ -3294,7 +3294,8 @@ class class1 {
 
                 }
 
-                var SendData2 = await SendData.reverse();
+                // var SendData2 = await SendData.reverse(); // Discussing With Sir
+                var SendData2 = await SendData;
 
                 var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
                 res.status(HTTP.SUCCESS).json(message);
@@ -5305,8 +5306,6 @@ class class2 {
 
                     var User4 = await User3.reverse();
 
-                    console.log(1);
-                    
                     var message = { "message": "Data Load Successfully", "data": User4, "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(message);
 
@@ -5625,8 +5624,6 @@ class class2 {
                             });
                         }
 
-                        //
-
                         var User3 = await Todo4.find({ Parklocation: User.UnitName, status: "Requested" })
                         if (User3.length !== 0) {
 
@@ -5655,7 +5652,7 @@ class class2 {
                                     "Make": PushData.CompanyName,
                                     "Time": Time,
                                     "Model": PushData.Model,
-                                    "TotleParkRRequestedLength": User33[0].Request
+                                    "TotleParkRRequestedLength": User3.length
                                 })
 
                             }
@@ -5688,8 +5685,6 @@ class class2 {
                                 "TotleParkRRequestedLength": 0
                             });
                         }
-
-                        // 
 
                         var User4 = await Todo8.find({ BusinessManagerUserName: req.UserName })
                         if (User4.length !== 0) {
@@ -6404,6 +6399,90 @@ class class2 {
                 }
 
 
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static A = async (req, res) => {
+        try {
+
+            if (req.UserName) {
+
+                const headerValue = req.get('Authorization');
+                
+                var User = await Todo2.findOne({ UserName: req.UserName })
+
+                if (headerValue == User.token) {
+
+                    var User2 = await Todo7.find({ UserName: User.UserName, ParkInTime: { $ne: "" } })
+
+                    var User3 = [];
+
+                    for (var i = 0; i < User2.length; i++) {
+
+                        const inputDate = new Date(User2[i].ParkInTime);
+                        const options = { month: 'long' };
+                        const formattedDate = new Intl.DateTimeFormat('en-US', options).format(inputDate);
+
+                        const year = inputDate.getFullYear();
+                        const month = String(inputDate.getMonth() + 1).padStart(2, '0');
+                        const day = String(inputDate.getDate()).padStart(2, '0');
+                        const hours = String(inputDate.getHours()).padStart(2, '0');
+                        const minutes = String(inputDate.getMinutes()).padStart(2, '0');
+                        const seconds = String(inputDate.getSeconds()).padStart(2, '0');
+
+                        function addSuffix(number) {
+
+                            if (number % 100 >= 11 && number % 100 <= 13) {
+                                return number + "th";
+                            }
+
+                            switch (number % 10) {
+                                case 1:
+                                    return number + "st";
+                                case 2:
+                                    return number + "nd";
+                                case 3:
+                                    return number + "rd";
+                                default:
+                                    return number + "th";
+                            }
+
+                        }
+
+                        const formattedTime3 = inputDate.toISOString().slice(0, 19).replace('T', ' ');
+
+                        const FinalFormattedDate = `${formattedDate} ${addSuffix(day)}, ${hours}:${minutes}`;
+
+                        var a = {
+                            "_id": User2[i]._id,
+                            "UserName": User2[i].UserName,
+                            "Message": User2[i].Message,
+                            "ParkInTime": FinalFormattedDate,
+                            "__v": User2[i].__v
+                        }
+
+                        await User3.push(a);
+
+                    }
+
+                    var User4 = await User3.reverse();
+
+                    var message = { "message": "Data Load Successfully", "data": User4, "status": `${HTTP.SUCCESS}` }
+                    res.status(HTTP.SUCCESS).json(message);
+
+                } else {
+                    var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                    res.status(HTTP.UNAUTHORIZED).json(a);
+                }
 
             } else {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }

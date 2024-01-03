@@ -115,5 +115,6 @@ router.post("/Change", class2.w);
 router.get("/PaymentGet", verifyToken, class2.x);
 router.post("/PlanPurchaseByCustomer", verifyToken, class2.y);
 router.post("/ClearAll", verifyToken, class2.z);
+router.get("/ShowNotification2", verifyToken , class2.A);
 
 module.exports = router;
