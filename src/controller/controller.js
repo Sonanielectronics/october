@@ -3630,6 +3630,8 @@ class class1 {
     static P = async (req, res) => {
         try {
 
+            console.log(req.body);
+            
             var User = await Todo.find({});
 
             for (var i = 0; i < User.length; i++) {
@@ -3999,6 +4001,8 @@ class class1 {
     static S = async (req, res) => {
         try {
 
+            console.log(1);
+
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
 
             if (ParkedCar.length !== 0) {
@@ -4132,6 +4136,8 @@ class class1 {
     };
     static T = async (req, res) => {
         try {
+
+            console.log(2);
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Accepted" })
 
