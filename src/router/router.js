@@ -90,7 +90,7 @@ router.post("/ForgetPasswordVerifyOtp", class1.Y);
 router.post("/NewPassword", class1.Z); 
 // router.post("/AddMember", verifyToken , class1.S);
 router.post("/AddMember", verifyToken , class2.a);
-// router.post("/Notification", verifyToken , class2.b);
+router.post("/Notification", verifyToken , class2.b);
 router.get("/CustomerPersonalDetails", verifyToken , class2.c);
 router.get("/FetchMember", verifyToken , class2.d);
 router.get("/ValetPersonalDetails", verifyToken , class2.e);
