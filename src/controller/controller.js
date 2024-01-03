@@ -3293,7 +3293,10 @@ class class1 {
                     await SendData.push(User[i]);
 
                 }
-                var message = { "message": "Data Load Successfully", "data": SendData, "status": `${HTTP.SUCCESS}` }
+
+                var SendData2 = await SendData.reverse();
+
+                var message = { "message": "Data Load Successfully", "data": SendData2, "status": `${HTTP.SUCCESS}` }
                 res.status(HTTP.SUCCESS).json(message);
 
             } else {
@@ -5750,6 +5753,14 @@ class class2 {
                 if (inputDateTime.isSame(currentDate, 'minute')) {
 
                     var User = await Todo2.findOne({ UserName: inputDate3 })
+
+                    let data2 = new Todo7({
+                        UserName: User.UserName,
+                        Message: `${inputDate2} is waiting for someone to accept the car request`,
+                        ParkInTime: currentTimeInSurat2
+                    });
+
+                    await data2.save();
 
                     const message = {
                         notification: {
