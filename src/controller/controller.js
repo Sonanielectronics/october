@@ -3630,8 +3630,6 @@ class class1 {
     static P = async (req, res) => {
         try {
 
-            console.log(req.body);
-            
             var User = await Todo.find({});
 
             for (var i = 0; i < User.length; i++) {
@@ -3644,9 +3642,11 @@ class class1 {
 
                             User[i].VehicleDetail[0].status = req.body.Status;
 
-                            if(req.body.Status2){
-                                User[i].VehicleDetail[0].status2 = req.body.Status2;
-                            }
+                            User[i].VehicleDetail[0].status2 = req.body.Status2;
+
+                            // if(req.body.Status2){
+                            //     User[i].VehicleDetail[0].status2 = req.body.Status2;
+                            // }
                             
                             await User[i].save();
 
@@ -3660,9 +3660,11 @@ class class1 {
 
                             User[i].VehicleDetail[1].status = req.body.Status;
 
-                            if(req.body.Status2){
-                                User[i].VehicleDetail[1].status2 = req.body.Status2;
-                            }
+                            User[i].VehicleDetail[1].status2 = req.body.Status2;
+
+                            // if(req.body.Status2){
+                            //     User[i].VehicleDetail[1].status2 = req.body.Status2;
+                            // }
 
                             await User[i].save();
 
@@ -4001,8 +4003,6 @@ class class1 {
     static S = async (req, res) => {
         try {
 
-            console.log(1);
-
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Requested" })
 
             if (ParkedCar.length !== 0) {
@@ -4136,8 +4136,6 @@ class class1 {
     };
     static T = async (req, res) => {
         try {
-
-            console.log(2);
 
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Accepted" })
 
