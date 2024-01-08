@@ -3387,9 +3387,9 @@ class class1 {
                 }
 
                 // var SendData2 = await SendData;
-                var SendData2 = await SendData.reverse(); 
+                // var SendData2 = await SendData.reverse(); 
 
-                const SendData3 = await SendData2.sort((a, b) => b.Request - a.Request);
+                const SendData3 = await SendData.sort((a, b) => b.Request - a.Request);
 
                 var message = { "message": "Data Load Successfully", "data": SendData3, "status": `${HTTP.SUCCESS}` }
                 res.status(HTTP.SUCCESS).json(message);
