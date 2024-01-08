@@ -1699,9 +1699,9 @@ class class1 {
 
                         await data2.save();
 
-                        var UserRequest = await Todo.findOne({ UserName: VehicleOwnerUserName })
-                        UserRequest.Request = UserRequest.Request + 1;
-                        UserRequest.save();
+                        // var UserRequest = await Todo.findOne({ UserName: VehicleOwnerUserName })
+                        // UserRequest.Request = UserRequest.Request + 1;
+                        // UserRequest.save();
 
                         axios.post(`${Ip}/StatusChange`, postData)
                             .then(response => {
@@ -2346,7 +2346,9 @@ class class1 {
                 var Access13 = User2.Access13;
                 var Access14 = User2.Access14;
 
-                res.render("Customer", { User2, User, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14 });
+                var exampleValue = 1;
+
+                res.render("Customer", { User2, User, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14, exampleValue });
 
             } else {
 
@@ -2393,6 +2395,70 @@ class class1 {
                 var Access14 = User2.Access14;
 
                 res.render("Customer", { User2, User, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14 });
+
+            } else {
+
+                res.redirect('/Login');
+
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static v2 = async (req, res) => {
+        try {
+
+            if (req.session.userid) {
+
+                var UpdatedUserIndex = await Number(req.body.ClassValue);
+
+                var User = await Todo.find({});
+
+                if(User[UpdatedUserIndex].Request == 0){
+                    User[UpdatedUserIndex].Request = await 1
+                }else{
+                    User[UpdatedUserIndex].Request = await 0
+                }
+
+                await User[UpdatedUserIndex].save();
+
+                const response = { "message": "Data Modified", "status": HTTP.SUCCESS };
+                res.status(HTTP.SUCCESS).json(response);
+
+            } else {
+
+                res.redirect('/Login');
+
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static w2 = async (req, res) => {
+        try {
+
+            if (req.session.userid) {
+
+                var UpdatedUserIndex = await Number(req.body.ClassValue);
+
+                var User = await Todo.find({});
+
+                if(User[UpdatedUserIndex].Request == 0){
+                    User[UpdatedUserIndex].Request = await 1
+                }else{
+                    User[UpdatedUserIndex].Request = await 0
+                }
+
+                await User[UpdatedUserIndex].save();
+
+                const response = { "message": "Data Modified", "status": HTTP.SUCCESS };
+                res.status(HTTP.SUCCESS).json(response);
 
             } else {
 

@@ -42,12 +42,12 @@
 
     @media (min-width: 992px) {
 
-      .nav{
+      .nav {
         min-height: calc(100vh - 180px);
       }
 
-      .card{
-      height: calc(100vh - 85px);
+      .card {
+        height: calc(100vh - 85px);
       }
 
       .sidebar .sidebar-wrapper {
@@ -62,7 +62,7 @@
         display: none;
       }
 
-      .card-header{
+      .card-header {
         display: none;
       }
 
@@ -70,7 +70,7 @@
 
     @media (max-width: 991px) {
 
-      #HidePicture4{
+      #HidePicture4 {
         display: none;
       }
 
@@ -80,8 +80,8 @@
         border-top: 1px solid #0070C0;
       }
 
-      .sidebar{
-        background:white;
+      .sidebar {
+        background: white;
       }
 
       .sidebar-wrapper {
@@ -146,8 +146,8 @@
       padding: 10px 20px;
       cursor: pointer;
     }
-    
-    #MainId{
+
+    #MainId {
       background: linear-gradient(#0070C0, #0070C0);
     }
 
@@ -182,8 +182,7 @@
           <% if (Access1===1) { %>
             <li>
               <a href="./DashBoard">
-                <p onmouseover="this.style.color='#D1D1D4'"
-                  onmouseout="this.style.color='black'">Business Registration
+                <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">Business Registration
                 </p>
               </a>
             </li>
@@ -192,8 +191,7 @@
               <% if (Access2===1) { %>
                 <li>
                   <a href="./User">
-                    <p onmouseover="this.style.color='#D1D1D4'"
-                      onmouseout="this.style.color='black'">Users</p>
+                    <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">Users</p>
                   </a>
                 </li>
                 <% } %>
@@ -201,8 +199,7 @@
                   <% if (Access3===1) { %>
                     <li>
                       <a href="./Customer">
-                        <p onmouseover="this.style.color='#D1D1D4'"
-                          onmouseout="this.style.color='black'">Customer</p>
+                        <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">Customer</p>
                       </a>
                     </li>
                     <% } %>
@@ -210,8 +207,8 @@
                       <% if (Access5===1) { %>
                         <li>
                           <a href="./Parking">
-                            <p onmouseover="this.style.color='#D1D1D4'"
-                              onmouseout="this.style.color='black'">Parking</p>
+                            <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">Parking
+                            </p>
                           </a>
                         </li>
                         <% } %>
@@ -219,8 +216,8 @@
                           <% if (Access7===1) { %>
                             <li>
                               <a href="./Hotel">
-                                <p onmouseover="this.style.color='#D1D1D4'"
-                                  onmouseout="this.style.color='black'">Hotels</p>
+                                <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">Hotels
+                                </p>
                               </a>
                             </li>
                             <% } %>
@@ -228,8 +225,8 @@
                               <% if (Access9===1) { %>
                                 <li>
                                   <a href="./Restaurant">
-                                    <p onmouseover="this.style.color='#D1D1D4'"
-                                      onmouseout="this.style.color='black'">Restaurants</p>
+                                    <p onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'">
+                                      Restaurants</p>
                                   </a>
                                 </li>
                                 <% } %>
@@ -291,9 +288,9 @@
                     <li class="nav-link"><a style="color: black;background-color: transparent;"
                         onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
                         class="nav-item dropdown-item">Change Password</a></li>
-                        <li class="nav-link"><a style="color: black;background-color: transparent;"
-                          onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
-                          class="nav-item dropdown-item">Log out</a></li>
+                    <li class="nav-link"><a style="color: black;background-color: transparent;"
+                        onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
+                        class="nav-item dropdown-item">Log out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -319,8 +316,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a style="color: black;background-color: transparent;"
-                    onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
-                    class="nav-item dropdown-item">Change Password</a></li>
+                      onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
+                      class="nav-item dropdown-item">Change Password</a></li>
                   <li class="nav-link"><a style="color: black;background-color: transparent;"
                       onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
                       class="nav-item dropdown-item">Log out</a></li>
@@ -360,14 +357,15 @@
                     <form id="hotel-filter-form">
                       <div class="form-row">
                         <div class="col">
-                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="Name" id="city-input">
+                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="Name"
+                            id="city-input">
                         </div>
                         <!-- <div class="col">
                           <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="Car Registered Number" id="state-input">
                         </div> -->
                         <div class="col">
                           <input type="submit" onclick="abc()" class="form-control" id="date-input"
-                          style="background-color: #0070C0;border: none;color: #D1D1D4;">
+                            style="background-color: #0070C0;border: none;color: #D1D1D4;">
                         </div>
                         <div class="col">
                           <!-- <button type="submit" class="btn btn-primary">Search</button> -->
@@ -383,14 +381,18 @@
                           <th class="text-center">
                             Car Registered
                           </th>
+                          <th class="text-center">
+                            premium
+                          </th>
                         </tr>
                       </thead>
 
-                      <tbody>
+                      <tbody id="callApiButton">
                         <% for (var i=0; i < User.length; i++) { %>
                           <tr>
                             <th class="text-center">
                               <%= User[i].UserName %>
+                                <%= User[i].Request %>
                             </th>
                             <th class="text-center">
                               <% for (var j=0; j < User[i].VehicleDetail.length; j++) { %>
@@ -400,6 +402,17 @@
 
                                   <% } %>
                             </th>
+                            <td class="text-center">
+
+                              <% if (User[i].Request==0) { %>
+                                <input type="checkbox" value="<%=User[i].Request%>" class="<%= i %>"
+                                  id="callApiButton<%= i + 1%>">
+                                <% } else { %>
+                                  <input type="checkbox" value="<%=User[i].Request%>" class="<%= i %>"
+                                    id="callApiButton<%= i + 1%>" checked>
+                            </td>
+                            <% } %>
+
                           </tr>
                           <% } %>
                       </tbody>
@@ -416,6 +429,7 @@
 
     </div>
   </div>
+
   <!--   Core JS Files   -->
   <script src="/src/css/js/core/jquery.min.js"></script>
   <script src="/src/css/js/core/popper.min.js"></script>
@@ -445,8 +459,6 @@
         window_width = $(window).width();
 
         fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
-
-
 
         $('.fixed-plugin a').click(function (event) {
           if ($(this).hasClass('switch-trigger')) {
@@ -552,25 +564,15 @@
 
   <script>
 
-    document.getElementById("callApiButton").addEventListener("click", function () {
+    async function handleButtonClick() {
+      
+      // var value = await this.value
+      var ClassValue = await this.className
 
-      var inputValue1 = document.getElementById("myInput1").value;
-      var inputValue2 = document.getElementById("myInput2").value;
-      var inputValue3 = document.getElementById("myInput3").value;
-      var inputValue4 = document.getElementById("myInput4").value;
-      var inputValue5 = document.getElementById("myInput5").value;
-      var inputValue6 = document.getElementById("myInput6").value;
-      var inputValue7 = document.getElementById("myInput7").value;
-
-      const url = 'CreateBusiness';
+      const url = 'Customer';
       const data = {
-        UserName: inputValue1,
-        ManagerName: inputValue2,
-        ManagerDestination: inputValue3,
-        PassWord: inputValue4,
-        UnitName: inputValue5,
-        UnitType: inputValue6,
-        UnitAddress: inputValue7
+        // value:value,
+        ClassValue: ClassValue
       };
 
       fetch(url, {
@@ -582,14 +584,32 @@
       })
         .then(response => response.json())
         .then(data => {
+
+          // console.log(data)
           console.log(data)
-          window.location.href = "/DashBoard";
+          window.location.href = "/Customer";
           // alert("Business Account Create Successfully"); 
         })
         .catch(error => {
           console.error('Error:', error);
         });
-    });
+
+    }
+
+    var tbody = document.getElementById('callApiButton');
+    var trElements = tbody.querySelectorAll('tr');
+    var totalButtons = trElements.length;
+
+    for (var i = 1; i <= totalButtons; i++) {
+
+      var buttonId = 'callApiButton' + i;
+
+      var button = document.getElementById(buttonId);
+
+      button.addEventListener("click", handleButtonClick);
+
+    }
+
   </script>
 
   <script>
@@ -601,32 +621,32 @@
       var myScriptVariable = '<%= Ip %>';
 
       var City = document.getElementById("city-input").value;
-      
+
       if (City) {
         City = City + "0"
       } else {
         City = await 0
       }
 
-      var url = myScriptVariable + "/Customer/" + City ;
+      var url = myScriptVariable + "/Customer/" + City;
       window.location.href = url;
 
     }
 
   </script>
 
-<script>
-  // Function to remove inline CSS properties
-  function removeInlineStyles(element) {
-    element.removeAttribute('style');
-  }
+  <script>
+    // Function to remove inline CSS properties
+    function removeInlineStyles(element) {
+      element.removeAttribute('style');
+    }
 
-  // Get the element by its ID or another selector
-  var myElement = document.getElementById('perfect-scrollbar-on');
+    // Get the element by its ID or another selector
+    var myElement = document.getElementById('perfect-scrollbar-on');
 
-  // Call the function to remove inline styles
-  removeInlineStyles(myElement);
-</script>
+    // Call the function to remove inline styles
+    removeInlineStyles(myElement);
+  </script>
 
 </body>
 

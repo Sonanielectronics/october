@@ -58,6 +58,8 @@ router.get("/User", class1.t);
 router.post("/User", class1.u);
 router.get("/Customer", class1.v);
 router.get("/Customer/:id1", class1.w);
+router.post("/Customer", class1.v2);
+router.post("/Customer/:id1", class1.w2);
 router.get("/Parking", class1.x);
 router.get("/Parking/:id1/:id2/:id3/:id4", class1.y);
 router.get("/Hotel", class1.z);
