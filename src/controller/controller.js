@@ -3355,6 +3355,7 @@ class class1 {
                 var User = await Todo4.find({ status: "Requested" })
 
                 var SendData = [];
+                var SendData2 = [];
 
                 for (var i = 0; i < User.length; i++) {
 
@@ -3378,20 +3379,38 @@ class class1 {
 
                     const result = await myAsyncFunction();
 
+                    var UserData = await User[i].Member[0];
+                    var UserOfficial = await Todo.find({ UserName: UserData });
+
                     User[i].WaitTime = result;
                     // User[i].UpdatedParklocation = result;
+                    User[i].Request = await UserOfficial[0].Request;
                     await User[i].save();
 
-                    await SendData.push(User[i]);
+                    if(User[i].Request == 1){
+                        await SendData.push(User[i]);
+                    }else{
+                        await SendData2.push(User[i]);
+                    }
 
                 }
 
-                // var SendData2 = await SendData;
-                // var SendData2 = await SendData.reverse(); 
+                var SendData3 = await SendData.reverse(); 
+                var SendData4 = await SendData2.reverse();
 
-                const SendData3 = await SendData.sort((a, b) => b.Request - a.Request);
+                var SendData5 = [];
 
-                var message = { "message": "Data Load Successfully", "data": SendData3, "status": `${HTTP.SUCCESS}` }
+                for(var i=0;i<SendData3.length;i++){
+                    await SendData5.push(SendData3[i]);
+                }
+
+                for(var i=0;i<SendData4.length;i++){
+                    await SendData5.push(SendData4[i]);
+                }
+
+                // const SendData3 = await SendData.sort((a, b) => b.Request - a.Request);
+
+                var message = { "message": "Data Load Successfully", "data": SendData5, "status": `${HTTP.SUCCESS}` }
                 res.status(HTTP.SUCCESS).json(message);
 
             } else {
