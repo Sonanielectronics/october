@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Required Fields</title>
+<script>
+    window.onload = function() {
+        var input4 = document.getElementById('input4');
+        var input5 = document.getElementById('input5');
+
+        input4.addEventListener('input', function() {
+            if (input4.value.trim() !== '') {
+                input5.setAttribute('required', 'required');
+            } else {
+                input5.removeAttribute('required');
+            }
+        });
+
+        input5.addEventListener('input', function() {
+            if (input5.value.trim() !== '') {
+                input4.setAttribute('required', 'required');
+            } else {
+                input4.removeAttribute('required');
+            }
+        });
+    };
+</script>
+</head>
+<body>
+    <form>
+        <label for="input1">Input 1:</label>
+        <input type="text" id="input1" name="input1"><br><br>
+
+        <label for="input4">Input 4:</label>
+        <input type="text" id="input4" name="input4"><br><br>
+
+        <label for="input5">Input 5:</label>
+        <input type="text" id="input5" name="input5"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
