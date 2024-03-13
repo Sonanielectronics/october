@@ -2706,7 +2706,14 @@ class class1 {
                 var Access14 = await User2.Access14;
                 var Access15 = await User2.Access15;
 
-                res.render("Parking", { User2, a, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14, Access15 });
+                const currentDate = new Date();
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const day = String(currentDate.getDate()).padStart(2, '0');
+
+                const formattedDateTime = `${year}-${month}-${day}`;
+
+                res.render("Parking", { User2, a, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14, Access15, formattedDateTime });
 
             } else {
 
@@ -2737,22 +2744,15 @@ class class1 {
                 }
 
                 if (req.params.id3.indexOf('0') !== -1) {
-                    var Name = await req.params.id3.slice(0, -1).toUpperCase();
+                    var Name = await req.params.id3.slice(0, -1);
                 }
 
-                const currentDate = new Date();
-                const year = currentDate.getFullYear();
-                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-                const day = String(currentDate.getDate()).padStart(2, '0');
-
-                const formattedDateTime = `${year}-${month}-${day}`;
-
                 if (City && State && Name) {
-                    var User = await Todo2.find({ City: City, State: State, UnitName: "Parked" });
+                    var User = await Todo2.find({ City: City, State: State, UnitName: Name });
                 } else if (State && Name) {
-                    var User = await Todo2.find({ UnitName: User[i].UnitName, State: State });
+                    var User = await Todo2.find({ UnitName: Name, State: State });
                 } else if (City && Name) {
-                    var User = await Todo2.find({ City: City, UnitName: "Parked" });
+                    var User = await Todo2.find({ City: City, UnitName: Name });
                 } else if (City && State) {
                     var User = await Todo2.find({ City: City, State: State });
                 } else if (City) {
@@ -2760,10 +2760,98 @@ class class1 {
                 } else if (State) {
                     var User = await Todo2.find({ State: State });
                 } else if (Name) {
-                    var User = await Todo2.find({ UnitName: User[i].UnitName });
+                    var User = await Todo2.find({ UnitName: Name });
                 } else {
                     var User = await Todo2.find({});
                 }
+
+                const currentDate = new Date();
+
+                const year = currentDate.getFullYear();
+                const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+                const day = String(currentDate.getDate()).padStart(2, '0');
+
+                const formattedDateTime = `${year}-${month}-${day}`;
+
+                // if (req.params.id4 == "All") {
+
+                //     for (var i = 0; i < User.length; i++) {
+                //         var User2 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Parked" });
+                //         var b = {
+                //             "UserName": User[i].UnitName,
+                //             "Parked": await User2.length,
+                //         }
+                //         await a.push(b);
+                //     }
+
+                // } else if (req.params.id4 == formattedDateTime) {
+
+                //     // for (var i = 0; i < User.length; i++) {
+
+                //     //     var User2 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Parked" });
+
+                //     //     var User3 = [];
+
+                //     //     for (var j = 0; j < User2.length; j++) {
+
+                //     //         var dateObject = new Date(User2[j].ParkInTime);
+
+                //     //         var year2 = dateObject.getFullYear();
+                //     //         var month2 = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+                //     //         var day2 = dateObject.getDate().toString().padStart(2, '0');
+
+                //     //         var formattedDateString = `${year2}-${month2}-${day2}`;
+
+                //     //         if (formattedDateTime == formattedDateString) {
+                //     //             await User3.push(User2[j]);
+                //     //         }
+
+                //     //     }
+
+                //     //     var b = {
+                //     //         "UserName": User[i].UnitName,
+                //     //         "Parked": await User3.length,
+                //     //     }
+
+                //     //     await a.push(b);
+
+                //     // }
+
+                // } else {
+
+                //     // for (var i = 0; i < User.length; i++) {
+
+                //     //     var User2 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Deliver" });
+
+                //     //     var User3 = [];
+
+                //     //     for (var j = 0; j < User2.length; j++) {
+
+                //     //         var dateObject = new Date(User2[j].ParkInTime);
+
+                //     //         var year2 = dateObject.getFullYear();
+                //     //         var month2 = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+                //     //         var day2 = dateObject.getDate().toString().padStart(2, '0');
+
+                //     //         var formattedDateString = `${year2}-${month2}-${day2}`;
+
+                //     //         if (req.params.id4 == formattedDateString) {
+                //     //             await User3.push(User2[j]);
+                //     //         }
+
+                //     //     }
+
+                //     //     var b = {
+                //     //         "UserName": User[i].UnitName,
+                //     //         "Parked": await User3.length,
+                //     //     }
+
+                //     //     await a.push(b);
+
+                //     // }
+
+                // }
+
 
                 if (req.params.id4 == "All") {
 
@@ -2776,13 +2864,13 @@ class class1 {
                         await a.push(b);
                     }
 
-                } else if (req.params.id4 == formattedDateTime) {
+                } else if (req.params.id5 == formattedDateTime) {
 
                     for (var i = 0; i < User.length; i++) {
 
-                        var User2 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Parked" });
-
                         var User3 = [];
+
+                        var User2 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Deliver" });
 
                         for (var j = 0; j < User2.length; j++) {
 
@@ -2794,8 +2882,32 @@ class class1 {
 
                             var formattedDateString = `${year2}-${month2}-${day2}`;
 
-                            if (formattedDateTime == formattedDateString) {
+                            function isDateInRange(dateToCheck, startDate, endDate) {
+                                return dateToCheck >= startDate && dateToCheck <= endDate;
+                            }
+
+                            if (isDateInRange(formattedDateString, req.params.id4, req.params.id5)) {
                                 await User3.push(User2[j]);
+                            }
+
+                        }
+
+                        var User22 = await Todo4.find({ Parklocation: User[i].UnitName, status: "Parked" });
+
+                        for (var j = 0; j < User22.length; j++) {
+
+                            const dateObject2 = new Date(formattedDateTime);
+
+                            const year2 = dateObject2.getFullYear();
+                            const month2 = String(dateObject2.getMonth() + 1).padStart(2, '0'); 
+                            const day2 = String(dateObject2.getDate()).padStart(2, '0');
+
+                            const formattedDateString2 = `${year2}-${month2}-${day2}`;
+
+                            if (formattedDateString2 == formattedDateTime) {
+
+                                await User3.push(User22[j]);
+
                             }
 
                         }
@@ -2827,7 +2939,11 @@ class class1 {
 
                             var formattedDateString = `${year2}-${month2}-${day2}`;
 
-                            if (req.params.id4 == formattedDateString) {
+                            function isDateInRange(dateToCheck, startDate, endDate) {
+                                return dateToCheck >= startDate && dateToCheck <= endDate;
+                            }
+
+                            if (isDateInRange(formattedDateString, req.params.id4, req.params.id5)) {
                                 await User3.push(User2[j]);
                             }
 
@@ -2862,7 +2978,7 @@ class class1 {
                 var Access14 = await User2.Access14;
                 var Access15 = await User2.Access15;
 
-                res.render("Parking", { User2, a, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14, Access15 });
+                res.render("Parking", { User2, a, Ip, Access1, Access2, Access3, Access4, Access5, Access6, Access7, Access8, Access9, Access10, Access11, Access12, Access13, Access14, Access15, formattedDateTime });
 
             } else {
 
@@ -7347,21 +7463,21 @@ class class2 {
 
                     var User3 = await Todo.findOne({ Phone: User.Phone })
 
-                    var DeleteStatus = 0 ;
+                    var DeleteStatus = 0;
 
-                    for(var i=0;i<User3.VehicleDetail.length;i++){
+                    for (var i = 0; i < User3.VehicleDetail.length; i++) {
 
-                        if(User3.VehicleDetail[i].status){
+                        if (User3.VehicleDetail[i].status) {
 
-                            if(User3.VehicleDetail[i].status !== ""){
+                            if (User3.VehicleDetail[i].status !== "") {
                                 var DeleteStatus = 1;
                             }
 
                         }
 
-                        if(User3.VehicleDetail[i].status2){
+                        if (User3.VehicleDetail[i].status2) {
 
-                            if(User3.VehicleDetail[i].status2 !== ""){
+                            if (User3.VehicleDetail[i].status2 !== "") {
                                 var DeleteStatus = 1;
                             }
 
@@ -7369,17 +7485,17 @@ class class2 {
 
                     }
 
-                    if(DeleteStatus == 0){
+                    if (DeleteStatus == 0) {
 
                         await Todo.findOne({ Phone: User.Phone }).deleteMany();
 
                         var a = { "message": "Customer Delete Successfully", "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(a);
-                    }else{
+                    } else {
                         var a = { "message": "Customer Does Not Delete", "status": `${HTTP.UNAUTHORIZED}` }
                         res.status(HTTP.UNAUTHORIZED).json(a);
                     }
-                    
+
                 } else {
 
                     var a = { "message": "Customer Delete Successfully", "status": `${HTTP.SUCCESS}` }

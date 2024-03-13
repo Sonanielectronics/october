@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  id="perfect-scrollbar-on">
+<html id="perfect-scrollbar-on">
 
 <head>
   <meta charset="utf-8" />
@@ -17,6 +17,9 @@
   <link href="/WeValet/src/css/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="/WeValet/src/css/demo/demo.css" rel="stylesheet" />
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/Zebra_datepicker/1.9.15/css/bootstrap/zebra_datepicker.min.css">
 
   <style>
     .content {
@@ -42,12 +45,12 @@
 
     @media (min-width: 992px) {
 
-      .nav{
+      .nav {
         min-height: calc(100vh - 180px);
       }
 
-      .card{
-      height: calc(100vh - 85px);
+      .card {
+        height: calc(100vh - 85px);
       }
 
       .sidebar .sidebar-wrapper {
@@ -62,7 +65,7 @@
         display: none;
       }
 
-      .card-header{
+      .card-header {
         display: none;
       }
 
@@ -70,7 +73,7 @@
 
     @media (max-width: 991px) {
 
-      #HidePicture4{
+      #HidePicture4 {
         display: none;
       }
 
@@ -80,11 +83,11 @@
         border-top: 1px solid #0070C0;
       }
 
-      .sidebar{
-        background:white;
+      .sidebar {
+        background: white;
       }
 
-      .wrapper{
+      .wrapper {
         height: 100%;
       }
 
@@ -151,7 +154,7 @@
       cursor: pointer;
     }
 
-    #MainId{
+    #MainId {
       background: linear-gradient(#0070C0, #0070C0);
     }
 
@@ -167,6 +170,7 @@
 </head>
 
 <body class="">
+
   <div class="wrapper">
     <div class="sidebar">
       <!--
@@ -253,14 +257,14 @@
                                         </li>
                                         <% } %>
 
-                                        <% if (Access15===1) { %>
-                                          <li>
-                                            <a href="/Payment">
-                                              <p onmouseover="this.style.color='#D1D1D4'"
-                                                onmouseout="this.style.color='black'">Payment</p>
-                                            </a>
-                                          </li>
-                                          <% } %>
+                                          <% if (Access15===1) { %>
+                                            <li>
+                                              <a href="/Payment">
+                                                <p onmouseover="this.style.color='#D1D1D4'"
+                                                  onmouseout="this.style.color='black'">Payment</p>
+                                              </a>
+                                            </li>
+                                            <% } %>
         </ul>
       </div>
     </div>
@@ -301,9 +305,9 @@
                     <li class="nav-link"><a style="color: black;background-color: transparent;"
                         onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
                         class="nav-item dropdown-item">Change Password</a></li>
-                        <li class="nav-link"><a style="color: black;background-color: transparent;"
-                          onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
-                          class="nav-item dropdown-item">Log out</a></li>
+                    <li class="nav-link"><a style="color: black;background-color: transparent;"
+                        onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
+                        class="nav-item dropdown-item">Log out</a></li>
                   </ul>
                 </li>
               </ul>
@@ -329,8 +333,8 @@
                 </a>
                 <ul class="dropdown-menu dropdown-navbar">
                   <li class="nav-link"><a style="color: black;background-color: transparent;"
-                    onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
-                    class="nav-item dropdown-item">Change Password</a></li>
+                      onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Change"
+                      class="nav-item dropdown-item">Change Password</a></li>
                   <li class="nav-link"><a style="color: black;background-color: transparent;"
                       onmouseover="this.style.color='#D1D1D4'" onmouseout="this.style.color='black'" href="Logout"
                       class="nav-item dropdown-item">Log out</a></li>
@@ -370,23 +374,28 @@
                     <form id="hotel-filter-form">
                       <div class="form-row">
                         <div class="col">
-                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="City" id="city-input">
+                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="City"
+                            id="city-input">
                         </div>
                         <div class="col">
-                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="State" id="state-input">
+                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="State"
+                            id="state-input">
                         </div>
                         <div class="col">
-                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="Name" id="Name-input">
+                          <input style="color: #D1D1D4;" type="text" class="form-control" placeholder="Name"
+                            id="Name-input">
                         </div>
                         <div class="col">
-                          <input type="date" style="color: #D1D1D4;" class="form-control" id="date-input">
+                          <input type="text" style="color: #D1D1D4;background-color: white;" class="form-control" name="date-input1"
+                            id="date-input1">
                         </div>
                         <div class="col">
-                          <input type="date" style="color: #D1D1D4;" class="form-control" id="date-input">
+                          <input type="text" style="color: #D1D1D4;background-color: white;" class="form-control" name="date-input2"
+                            id="date-input2">
                         </div>
                         <div class="col">
                           <input type="submit" onclick="abc()" class="form-control" id="date-input"
-                          style="background-color: #0070C0;border: none;color: #D1D1D4;">
+                            style="background-color: #0070C0;border: none;color: #D1D1D4;">
                         </div>
                         <div class="col">
                           <!-- <button type="submit" class="btn btn-primary">Search</button> -->
@@ -622,13 +631,8 @@
       var City = document.getElementById("city-input").value;
       var State = document.getElementById("state-input").value;
       var Name = document.getElementById("Name-input").value;
-      var Date = document.getElementById("date-input").value;
-
-      if (Date) {
-        console.log(Date)
-      } else {
-        Date = await "All"
-      }
+      var Date1 = document.getElementById("date-input1").value;
+      var Date2 = document.getElementById("date-input2").value;
 
       if (City) {
         City = City + "0"
@@ -639,34 +643,169 @@
       if (State) {
         State = State + "0"
       } else {
-        State = await "All"
+        State = await 0
       }
 
       if (Name) {
         Name = Name + "0"
       } else {
-        Name = await "All"
+        Name = await 0
       }
 
-      var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/" + Date;
-      window.location.href = url;
+      if (Date1.trim() !== '') {
+
+        if (Date2.trim() == '') {
+
+          alert("Please Select End Date");
+
+          var url = myScriptVariable + "/Parking"
+          window.location.href = url;
+
+        } else {
+
+          const formattedDateTime = "<%= formattedDateTime %>";
+
+          if (Date1 == formattedDateTime && Date2 == formattedDateTime) {
+
+            var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/All/All";
+            window.location.href = url;
+
+          } else {
+
+            var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/" + Date1 + "/" + Date2;
+            window.location.href = url;
+
+          }
+
+        }
+
+      } else if (Date2.trim() !== '') {
+
+        if (Date1.trim() == '') {
+
+          alert("Please Select Start Date");
+
+          var url = myScriptVariable + "/Parking"
+          window.location.href = url;
+
+        } else {
+
+          const formattedDateTime = "<%= formattedDateTime %>";
+
+          if (Date1 == formattedDateTime && Date2 == formattedDateTime) {
+
+            var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/All/All";
+            window.location.href = url;
+
+          } else {
+
+            var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/" + Date1 + "/" + Date2;
+            window.location.href = url;
+
+          }
+
+        }
+
+      } else {
+
+        if (Date1) {
+          console.log(Date1)
+        } else {
+          Date1 = await "All"
+        }
+
+        if (Date2) {
+          console.log(Date2)
+        } else {
+          Date2 = await "All"
+        }
+
+        var url = myScriptVariable + "/Parking/" + City + "/" + State + "/" + Name + "/" + Date1 + "/" + Date2;
+        window.location.href = url;
+
+      }
 
     }
 
   </script>
 
-<script>
-  // Function to remove inline CSS properties
-  function removeInlineStyles(element) {
-    element.removeAttribute('style');
-  }
+  <script>
 
-  // Get the element by its ID or another selector
-  var myElement = document.getElementById('perfect-scrollbar-on');
+    var today = new Date();
 
-  // Call the function to remove inline styles
-  removeInlineStyles(myElement);
-</script>
+    var yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    var yesterdayFormatted = yesterday.toISOString().split('T')[0];
+
+    document.getElementById('date-input1').setAttribute('max', yesterdayFormatted);
+
+    // Function to remove inline CSS properties
+    function removeInlineStyles(element) {
+      element.removeAttribute('style');
+    }
+
+    // Get the element by its ID or another selector
+    var myElement = document.getElementById('perfect-scrollbar-on');
+
+    // Call the function to remove inline styles
+    removeInlineStyles(myElement);
+  </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Zebra_datepicker/1.9.15/zebra_datepicker.min.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+
+      var yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      var yesterdayFormatted = yesterday.toISOString().slice(0, 10);
+
+      $('#date-input1').Zebra_DatePicker({
+
+        format: 'Y-m-d',
+        maxDate: yesterdayFormatted,
+        onSelect: function (view, elements) {
+
+          var selectedDate = new Date($(this).val());
+          var maxDate = new Date(yesterdayFormatted);
+
+          if (selectedDate > maxDate) {
+
+            $(this).val('');
+            alert('Please Select Any Past Date');
+
+          }
+
+        }
+
+      });
+
+      $('#date-input2').Zebra_DatePicker({
+
+        format: 'Y-m-d',
+        maxDate: yesterdayFormatted,
+        onSelect: function (view, elements) {
+
+          var selectedDate = new Date($(this).val());
+          var maxDate = new Date(yesterdayFormatted);
+
+          if (selectedDate > maxDate) {
+
+            $(this).val('');
+            alert('Please Select Any Past Date');
+
+          }
+
+        }
+
+      });
+
+    });
+
+  </script>
 
 </body>
 
