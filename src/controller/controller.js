@@ -1768,8 +1768,6 @@ class class1 {
     static l = async (req, res) => {
         try {
 
-            console.log("Api Call");
-
             var ParkedCar = await Todo4.find({ RegistrationNumber: req.body.RegistrationNumber, status: "Parked" })
 
             if (ParkedCar.length !== 0) {
@@ -4443,8 +4441,6 @@ class class1 {
                         }
                     }, { returnOriginal: false })
 
-                    console.log(ParkedCar2);
-
                     await Todo8.findOneAndUpdate({ Username: req.UserName }, {
                         $set: {
                             ValetStatus: 0
@@ -4472,9 +4468,18 @@ class class1 {
 
                                 var FcmTokenUser = await Todo.find({ UserName: UserNameData })
 
-                                // var ActivePopParkingUser = await FcmTokenUser[0].UserName;
-                                // FcmTokenUser[0].ActiveParkingUser.pop(ActivePopParkingUser);
-                                // await FcmTokenUser[0].save();
+                                async function removeElementFromArray(array, element) {
+                                    const index = array.indexOf(element);
+                                    if (index > -1) { 
+                                        array.splice(index, 1); 
+                                    }
+                                    return array;
+                                }
+
+                                var array1 = await FcmTokenUser[0].ActiveParkingUser;
+                                var RemoveElement = await ParkedCar2.CarBringer;
+
+                                await removeElementFromArray(array1, RemoveElement);
 
                                 var FcmToken = await FcmTokenUser[0].Fcm;
                                 var FcmTokenUserName = await FcmTokenUser[0].UserName;
