@@ -1,9 +1,9 @@
-async function removeElementFromArray(array, element) {
-    const index = array.indexOf(element);
-    if (index > -1) { 
-        array.splice(index, 1); 
-    }
-    return array;
-}
+var RemoveElement = 16
 
-        const newArray = await removeElementFromArray(array1, 2);
+var array1 = [11, 12, 13, 14, 15, 13]
+
+array1 = array1.filter(function(item) {
+    return item !== RemoveElement
+})
+
+console.log(array1)

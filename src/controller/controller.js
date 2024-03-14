@@ -4468,18 +4468,12 @@ class class1 {
 
                                 var FcmTokenUser = await Todo.find({ UserName: UserNameData })
 
-                                async function removeElementFromArray(array, element) {
-                                    const index = array.indexOf(element);
-                                    if (index > -1) { 
-                                        array.splice(index, 1); 
-                                    }
-                                    return array;
-                                }
-
                                 var array1 = await FcmTokenUser[0].ActiveParkingUser;
                                 var RemoveElement = await ParkedCar2.CarBringer;
 
-                                await removeElementFromArray(array1, RemoveElement);
+                                array1 = array1.filter(function(item) {
+                                    return item !== RemoveElement
+                                })
 
                                 var FcmToken = await FcmTokenUser[0].Fcm;
                                 var FcmTokenUserName = await FcmTokenUser[0].UserName;
