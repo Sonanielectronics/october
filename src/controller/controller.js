@@ -2043,15 +2043,15 @@ class class1 {
 
                                     await data22.save();
 
-                                    const currentTimeInSurat2 = moment().tz(suratTimezone);
-                                    const futureTimeInSurat2 = currentTimeInSurat2.add(result.message, 'minutes');
-                                    const formattedFutureTime2 = futureTimeInSurat2.format('YYYY-MM-DDTHH:mm:ss');
+                                    const currentTimeInSurat3 = moment().tz(suratTimezone);
+                                    const futureTimeInSurat3 = currentTimeInSurat3.add(result.message, 'minutes');
+                                    const formattedFutureTime3 = futureTimeInSurat3.format('YYYY-MM-DDTHH:mm:ss');
 
                                     let data222 = new Todo7({
                                         UserName: UserNameData,
                                         Message: "Your vehicle is now available for pickup at the gate. Thank you",
                                         ParkInTime: "",
-                                        NotificationRemainingTime: formattedFutureTime2
+                                        NotificationRemainingTime: formattedFutureTime3
                                     });
 
                                     await data222.save();
