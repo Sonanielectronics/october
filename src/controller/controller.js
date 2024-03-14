@@ -4092,7 +4092,7 @@ class class1 {
     };
     static O = async (req, res) => {
         try {
-
+            
             if (req.UserName) {
 
                 var User = await Todo.find({});
@@ -4102,17 +4102,19 @@ class class1 {
 
                 for (var i = 0; i < User.length; i++) {
 
-                    var Member = [];
+                    // var Member = [];
 
-                    if (User[i].Member) {
+                    // if (User[i].Member) {
 
-                        await Member.push(User[i].UserName);
+                        // await Member.push(User[i].UserName);
 
-                        for (var j = 0; j < User[i].Member.length; j++) {
-                            await Member.push(User[i].Member[j][0].Name);
-                        }
+                        // for (var j = 0; j < User[i].Member.length; j++) {
+                        //     await Member.push(User[i].Member[j][0].Name);
+                        // }
 
-                    }
+                    // }
+
+                    var Member = await User[i].ActiveParkingUser
 
                     if (User[i].VehicleDetail) {
 

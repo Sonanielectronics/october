@@ -47,7 +47,7 @@ router.post("/WalletParkInRequest3", verifyToken, class1.k);
 router.post("/UserParkOutRequest", verifyToken, class1.l);
 router.post("/WaletRequestAction", verifyToken, class1.m);
 router.post("/WaletUpdateUserWaitTime", verifyToken, class1.n);
-router.post("/UserWaitTime", class1.o);
+router.post("/UserWaitTime", class1.o); // 1
 // router.get("/UserAccounts", class1.o);
 // router.get("/BusinessAccounts", class1.p);
 router.get("/Login", class1.p);
