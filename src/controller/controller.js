@@ -2043,7 +2043,8 @@ class class1 {
 
                                     await data22.save();
 
-                                    const futureTimeInSurat3 = currentTimeInSurat2.add(result.message, 'minutes');
+                                    // const currentTimeInSurat3 = moment().tz(suratTimezone);
+                                    const futureTimeInSurat3 = currentTimeInSurat.add(result.message, 'minutes');
                                     const formattedFutureTime3 = futureTimeInSurat3.format('YYYY-MM-DDTHH:mm:ss');
 
                                     let data222 = new Todo7({
