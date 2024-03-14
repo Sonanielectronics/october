@@ -1444,8 +1444,6 @@ class class1 {
     static j = async (req, res) => {
         try {
 
-            console.log(req.body);
-
             if (req.UserName) {
 
                 const headerValue = req.get('Authorization');
@@ -1602,7 +1600,7 @@ class class1 {
 
                                                 const message = {
                                                     notification: {
-                                                        title: 'Your Car has been parked',
+                                                        title: 'Your vehicle is parked, Thank You',
                                                         sound: 'default'
                                                     },
                                                     android: {
@@ -2045,6 +2043,19 @@ class class1 {
 
                                     await data22.save();
 
+                                    const currentTimeInSurat2 = moment().tz(suratTimezone);
+                                    const futureTimeInSurat2 = currentTimeInSurat2.add(result.message, 'minutes');
+                                    const formattedFutureTime2 = futureTimeInSurat2.format('YYYY-MM-DDTHH:mm:ss');
+
+                                    let data222 = new Todo7({
+                                        UserName: UserNameData,
+                                        Message: "Your vehicle is now available for pickup at the gate. Thank you",
+                                        ParkInTime: "",
+                                        NotificationRemainingTime: formattedFutureTime2
+                                    });
+
+                                    await data222.save();
+
                                     User2.ValetStatus = 2;
                                     await User2.save();
 
@@ -2053,7 +2064,7 @@ class class1 {
 
                                             const message = {
                                                 notification: {
-                                                    title: 'Car is on the way',
+                                                    title: 'Your request has been accepted, Thank You',
                                                 },
                                                 android: {
                                                     notification: {
@@ -5945,8 +5956,6 @@ class class2 {
                     res.status(HTTP.UNAUTHORIZED).json(a);
                 }
 
-
-
             } else {
                 var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
                 res.status(HTTP.BAD_REQUEST).json(a);
@@ -7338,13 +7347,7 @@ class class2 {
     static F = async (req, res) => {
         try {
 
-            const headerValue = req.get('Authorization');
-
-            var User = await Todo.findOne({ Phone: req.Phone })
-
-            if (User) {
-
-                if (headerValue == User.token && ParkedCar[0].Member.includes(User.UserName)) {
+            var User = await Todo.findOne({})
 
                     const message = {
                         notification: {
@@ -7368,25 +7371,19 @@ class class2 {
                     fcm.send(message)
                         .then((response) => {
 
-                            var a = { "message": "Valet Parked Car Sucessfully & Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                            var a = { "message": "Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
                             res.status(HTTP.SUCCESS).json(a);
 
                         })
                         .catch((error) => {
 
-                            var a = { "message": "Valet Parked Car Sucessfully & Notification Does Not Send", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+                            var a = { "message": "Notification Does Not Send", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
                             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
                         });
 
-                } else {
-                    var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
-                    res.status(HTTP.UNAUTHORIZED).json(a);
-                }
+                
 
-            } else {
-                var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
-                res.status(HTTP.NOT_FOUND).json(a);
-            }
+            
 
         } catch (e) {
             console.log(e);
