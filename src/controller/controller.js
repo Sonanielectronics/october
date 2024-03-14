@@ -2065,6 +2065,18 @@ class class1 {
 
                                     await data222.save();
 
+                                    const futureTimeInSurat32 = currentTimeInSurat22.add(+3, 'minutes');
+                                    const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
+
+                                    let data2222 = new Todo7({
+                                        UserName: UserNameData,
+                                        Message: "Your vehicle is on the way, Thank You",
+                                        ParkInTime: "",
+                                        NotificationRemainingTime: formattedFutureTime32
+                                    });
+
+                                    await data2222.save();
+
                                     User2.ValetStatus = 2;
                                     await User2.save();
 
