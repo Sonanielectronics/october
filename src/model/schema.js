@@ -30,6 +30,7 @@ var UserSchema = new mongoose.Schema({
     StatusChange: String,
   }],
   Member:Array,
+  ActiveParkingUser:Array,
   Promocode: {
     type: String,
   },

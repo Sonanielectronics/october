@@ -160,7 +160,8 @@ class class1 {
                                 Request: 0,
                                 PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
-                                OfficialPlanExpiredDate: ""
+                                OfficialPlanExpiredDate: "",
+                                ActiveParkingUser: [req.body.UserName]
                             })
                             await data.save();
 
@@ -175,7 +176,8 @@ class class1 {
                                 Request: 0,
                                 PlanPurchase: "",
                                 PlanExpiredDate: PlanExpiredDate,
-                                OfficialPlanExpiredDate: ""
+                                OfficialPlanExpiredDate: "",
+                                ActiveParkingUser: [req.body.UserName]
                             })
                             await data.save();
 
@@ -1442,6 +1444,8 @@ class class1 {
     static j = async (req, res) => {
         try {
 
+            console.log(req.body);
+            
             if (req.UserName) {
 
                 const headerValue = req.get('Authorization');
@@ -1586,6 +1590,11 @@ class class1 {
                                         const UserNameData = response.data.message[0];
 
                                         var FcmTokenUser = await Todo.find({ UserName: UserNameData })
+
+                                        // var ActivePushParkingUser = await FcmTokenUser[0].UserName;
+                                        // FcmTokenUser[0].ActiveParkingUser.push(ActivePushParkingUser);
+                                        // await FcmTokenUser[0].save();
+
                                         var FcmToken = await FcmTokenUser[0].Fcm;
 
                                         axios.post(`${Ip}/StatusChange`, postData)
@@ -2899,7 +2908,7 @@ class class1 {
                             const dateObject2 = new Date(formattedDateTime);
 
                             const year2 = dateObject2.getFullYear();
-                            const month2 = String(dateObject2.getMonth() + 1).padStart(2, '0'); 
+                            const month2 = String(dateObject2.getMonth() + 1).padStart(2, '0');
                             const day2 = String(dateObject2.getDate()).padStart(2, '0');
 
                             const formattedDateString2 = `${year2}-${month2}-${day2}`;
@@ -5116,6 +5125,7 @@ class class2 {
                         ];
 
                         User2[0].Member.push(Array);
+                        User2[0].ActiveParkingUser.push(req.body.Name);
                         await User2[0].save();
 
                         var a = { "message": "Member Add Successfully", "status": `${HTTP.SUCCESS}` }
