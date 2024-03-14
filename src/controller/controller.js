@@ -1445,7 +1445,7 @@ class class1 {
         try {
 
             console.log(req.body);
-            
+
             if (req.UserName) {
 
                 const headerValue = req.get('Authorization');
@@ -4443,6 +4443,8 @@ class class1 {
                         }
                     }, { returnOriginal: false })
 
+                    console.log(ParkedCar2);
+
                     await Todo8.findOneAndUpdate({ Username: req.UserName }, {
                         $set: {
                             ValetStatus: 0
@@ -4469,6 +4471,11 @@ class class1 {
                                 const UserNameData = response.data.message[0];
 
                                 var FcmTokenUser = await Todo.find({ UserName: UserNameData })
+
+                                // var ActivePopParkingUser = await FcmTokenUser[0].UserName;
+                                // FcmTokenUser[0].ActiveParkingUser.pop(ActivePopParkingUser);
+                                // await FcmTokenUser[0].save();
+
                                 var FcmToken = await FcmTokenUser[0].Fcm;
                                 var FcmTokenUserName = await FcmTokenUser[0].UserName;
 
