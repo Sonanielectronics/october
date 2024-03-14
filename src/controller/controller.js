@@ -4471,7 +4471,7 @@ class class1 {
                                 var array1 = await FcmTokenUser[0].ActiveParkingUser;
                                 var RemoveElement = await ParkedCar2.CarBringer;
 
-                                array1 = array1.filter(function(item) {
+                                FcmTokenUser[0].ActiveParkingUser = array1.filter(function(item) {
                                     return item !== RemoveElement
                                 })
 
