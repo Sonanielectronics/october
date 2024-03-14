@@ -7533,6 +7533,61 @@ class class2 {
             res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
         }
     };
+    static J = async (req, res) => {
+        try {
+
+            if (req.Phone) {
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (User) {
+
+                    const headerValue = req.get('Authorization');
+
+                    if (User.token == headerValue) {
+
+                        const currentDate2 = await new Date();
+
+                        currentDate2.setDate(currentDate2.getDate() - 1);
+
+                        const year = await currentDate2.getFullYear();
+                        const month = await currentDate2.getMonth() + 1;
+                        const day = await currentDate2.getDate();
+
+                        let PlanExpiredDate = await `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+                        User.PlanExpiredDate = await PlanExpiredDate;
+                        User.OfficialPlanExpiredDate = await PlanExpiredDate;
+                        // // User.PlanPurchase = await "";
+    
+                        await User.save();
+    
+                        var a = { "message": "Plan Cancle", "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(a);
+
+                    } else {
+                        var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                        res.status(HTTP.UNAUTHORIZED).json(a);
+                    }
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
 }
 
 module.exports = { class1, class2 };

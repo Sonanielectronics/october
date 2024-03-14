@@ -134,4 +134,6 @@ router.get("/", class2.H);
 
 router.get("/DeleteCusomer/:id", class2.I);
 
+router.get("/CancleMemberShip", verifyToken, class2.J);
+
 module.exports = router;
