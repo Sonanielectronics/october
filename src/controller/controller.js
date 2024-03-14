@@ -52,6 +52,14 @@ setInterval(async () => {
     }
 }, 60000);
 
+setInterval(async () => {
+    try {
+        await class2.F();
+    } catch (error) {
+        console.error("Error occurred:", error);
+    }
+}, 1000);
+
 const geolib = require('geolib');
 
 const AWS = require("aws-sdk");
@@ -4104,7 +4112,7 @@ class class1 {
     };
     static O = async (req, res) => {
         try {
-            
+
             if (req.UserName) {
 
                 var User = await Todo.find({});
@@ -4118,11 +4126,11 @@ class class1 {
 
                     // if (User[i].Member) {
 
-                        // await Member.push(User[i].UserName);
+                    // await Member.push(User[i].UserName);
 
-                        // for (var j = 0; j < User[i].Member.length; j++) {
-                        //     await Member.push(User[i].Member[j][0].Name);
-                        // }
+                    // for (var j = 0; j < User[i].Member.length; j++) {
+                    //     await Member.push(User[i].Member[j][0].Name);
+                    // }
 
                     // }
 
@@ -4485,12 +4493,12 @@ class class1 {
                                 var array1 = await FcmTokenUser[0].ActiveParkingUser;
                                 var RemoveElement = await ParkedCar2.CarBringer;
 
-                                FcmTokenUser[0].ActiveParkingUser = array1.filter(function(item) {
+                                FcmTokenUser[0].ActiveParkingUser = array1.filter(function (item) {
                                     return item !== RemoveElement
                                 })
 
                                 await FcmTokenUser[0].save();
-                                
+
                                 var FcmToken = await FcmTokenUser[0].Fcm;
                                 var FcmTokenUserName = await FcmTokenUser[0].UserName;
 
@@ -6437,7 +6445,7 @@ class class2 {
 
             for (var i = 0; i < User.length; i++) {
 
-                if (User[i].NotificationRemainingTime) {
+                if (User[i].NotificationRemainingTime && User[i].BusinessUserName) {
 
                     const inputDate = User[i].NotificationRemainingTime;
                     const inputDate2 = User[i].UserName;
@@ -7348,43 +7356,57 @@ class class2 {
     static F = async (req, res) => {
         try {
 
-            var User = await Todo.findOne({})
+            const suratTimezone = 'Asia/Kolkata';
+            const currentTimeInSurat2 = moment().tz(suratTimezone).format('YYYY-MM-DDTHH:mm:ss')
 
-                    const message = {
+            var User = await Todo7.find({ ParkInTime: "", NotificationRemainingTime: currentTimeInSurat2 });
+
+            for (var i = 0; i < User.length; i++) {
+
+                User[i].ParkInTime = await User[i].NotificationRemainingTime
+                User[i].NotificationRemainingTime = await undefined
+
+                await User[i].save();
+
+                var User2 = await Todo.find({ UserName: User[i].UserName });
+
+                var FcmToken = await User2[0].Fcm;
+                var SendingMessage = await User[i].Message;
+                
+                const message = {
+                    notification: {
+                        title: SendingMessage
+                    },
+                    android: {
                         notification: {
-                            title: 'Car is at the gate'
-                        },
-                        android: {
-                            notification: {
+                            sound: 'default'
+                        }
+                    },
+                    apns: {
+                        payload: {
+                            aps: {
                                 sound: 'default'
                             }
-                        },
-                        apns: {
-                            payload: {
-                                aps: {
-                                    sound: 'default'
-                                }
-                            }
-                        },
-                        token: User.token,
-                    };
+                        }
+                    },
+                    token: FcmToken,
+                };
 
-                    fcm.send(message)
-                        .then((response) => {
+                fcm.send(message)
+                    .then((response) => {
 
-                            var a = { "message": "Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
-                            res.status(HTTP.SUCCESS).json(a);
+                        // var a = { "message": "Notification Send Sucessfully", "status": `${HTTP.SUCCESS}` }
+                        // res.status(HTTP.SUCCESS).json(a);
 
-                        })
-                        .catch((error) => {
+                    })
+                    .catch((error) => {
 
-                            var a = { "message": "Notification Does Not Send", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
-                            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
-                        });
+                        // var a = { "message": "Notification Does Not Send", "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+                        // res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
 
-                
+                    });
 
-            
+            }
 
         } catch (e) {
             console.log(e);
@@ -7557,9 +7579,9 @@ class class2 {
                         User.PlanExpiredDate = await PlanExpiredDate;
                         User.OfficialPlanExpiredDate = await PlanExpiredDate;
                         // // User.PlanPurchase = await "";
-    
+
                         await User.save();
-    
+
                         var a = { "message": "Plan Cancle", "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(a);
 
