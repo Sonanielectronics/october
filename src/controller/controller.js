@@ -4475,6 +4475,8 @@ class class1 {
                                     return item !== RemoveElement
                                 })
 
+                                await FcmTokenUser[0].save();
+                                
                                 var FcmToken = await FcmTokenUser[0].Fcm;
                                 var FcmTokenUserName = await FcmTokenUser[0].UserName;
 
