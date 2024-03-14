@@ -1971,6 +1971,7 @@ class class1 {
                         const currentTimeInSurat2 = moment().tz(suratTimezone).format('YYYY-MM-DDTHH:mm:ss')
                         const currentTimeInSurat = moment().tz(suratTimezone);
                         const currentTimeInSurat22 = moment().tz(suratTimezone);
+                        const currentTimeInSurat222 = moment().tz(suratTimezone);
                         const futureTimeInSurat = currentTimeInSurat.add(-1, 'minutes');
                         const formattedFutureTime = futureTimeInSurat.format('YYYY-MM-DDTHH:mm:ss');
 
@@ -2065,7 +2066,7 @@ class class1 {
 
                                     await data222.save();
 
-                                    const futureTimeInSurat32 = currentTimeInSurat22.add(+3, 'minutes');
+                                    const futureTimeInSurat32 = currentTimeInSurat222.add(+3, 'minutes');
                                     const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
 
                                     let data2222 = new Todo7({
