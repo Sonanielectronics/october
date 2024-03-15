@@ -7724,7 +7724,17 @@ class class2 {
 
                         var User2 = await Todo10.find({ Date: req.body.Date, RegistrationNumber: req.body.RegistrationNumber, UserAction: req.body.UserAction })
 
-                        var message2 = { "message": "Data Load Successfully", "data": User2, "status": `${HTTP.SUCCESS}` }
+                        var locations = [];
+
+                        for(var i=0;i<User2.length;i++){
+
+                            for(var j=0;j<User2[i].Pictures.length;j++){
+                                await locations.push(User2[i].Pictures[j])
+                            }
+
+                        }
+
+                        var message2 = { "message": "Data Load Successfully", "data": locations, "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(message2);
 
                     } else {
