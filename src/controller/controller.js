@@ -1316,7 +1316,6 @@ class class1 {
                                 }
 
                                 const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
-                                const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
 
                                 const files = req.files;
 
@@ -1412,6 +1411,8 @@ class class1 {
                                 RegistrationNumber: req.body.RegistrationNumber,
                                 Status: "",
                             };
+
+                            const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
 
                             let data222 = new Todo10({
                                 Date: formattedDateTime2,
