@@ -1413,7 +1413,7 @@ class class1 {
                             };
 
                             const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
-                            const formattedDateTime3 = `${currentHours}-${currentMinutes}-${currentSeconds}`;
+                            const formattedDateTime3 = `${currentHours}:${currentMinutes}:${currentSeconds}`;
 
                             let data222 = new Todo10({
                                 Date: formattedDateTime2,
@@ -4412,7 +4412,7 @@ class class1 {
 
                     const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
                     const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
-                    const formattedDateTime3 = `${currentHours}-${currentMinutes}-${currentSeconds}`;
+                    const formattedDateTime3 = `${currentHours}:${currentMinutes}:${currentSeconds}`;
 
                     const files = req.files;
 
