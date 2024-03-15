@@ -1271,6 +1271,8 @@ class class1 {
                                 await UpdatedParklocation.push(Parklocation)
                             }
 
+                            const locations = [];
+                            
                             if (UserData[0].VehicleDetail) {
 
                                 const suratTimezone = 'Asia/Kolkata';
@@ -1318,8 +1320,6 @@ class class1 {
                                 const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
 
                                 const files = req.files;
-
-                                const locations = [];
 
                                 for (let i = 0; i < files.length; i++) {
 
