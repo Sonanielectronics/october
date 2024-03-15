@@ -1413,9 +1413,11 @@ class class1 {
                             };
 
                             const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
+                            const formattedDateTime3 = `${currentHours}-${currentMinutes}-${currentSeconds}`;
 
                             let data222 = new Todo10({
                                 Date: formattedDateTime2,
+                                Time: formattedDateTime3,
                                 Pictures: locations,
                                 RegistrationNumber: req.body.RegistrationNumber,
                                 UserAction: "ParkIn"
@@ -4410,6 +4412,7 @@ class class1 {
 
                     const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
                     const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
+                    const formattedDateTime3 = `${currentHours}-${currentMinutes}-${currentSeconds}`;
 
                     const files = req.files;
 
@@ -4457,6 +4460,7 @@ class class1 {
 
                     let data222 = new Todo10({
                         Date: formattedDateTime2,
+                        Time: formattedDateTime3,
                         Pictures: locations,
                         RegistrationNumber: req.body.RegistrationNumber,
                         UserAction: "ParkOut"

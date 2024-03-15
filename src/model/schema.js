@@ -427,6 +427,9 @@ var PictureSchema = new mongoose.Schema({
   Date: {
     type: String,
   },
+  Time: {
+    type: String,
+  },
   UserAction: {
     type: String,
   },
