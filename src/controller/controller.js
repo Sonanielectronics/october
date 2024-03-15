@@ -1272,7 +1272,7 @@ class class1 {
                             }
 
                             const locations = [];
-                            
+
                             if (UserData[0].VehicleDetail) {
 
                                 const suratTimezone = 'Asia/Kolkata';
@@ -4399,6 +4399,7 @@ class class1 {
                     }
 
                     const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
+                    const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
 
                     const files = req.files;
 
@@ -4443,6 +4444,15 @@ class class1 {
                     ParkedCar2[0].CarDeliverPicture = locations;
 
                     await ParkedCar2[0].save();
+
+                    let data222 = new Todo10({
+                        Date: formattedDateTime2,
+                        Pictures: locations,
+                        RegistrationNumber: req.body.RegistrationNumber,
+                        UserAction: "ParkOut"
+                    });
+
+                    await data222.save();
 
                     var a = { "message": "Vehicle Deliver Picture Upload Sucessfully", "status": `${HTTP.SUCCESS}` }
                     res.status(HTTP.SUCCESS).json(a);
