@@ -1,4 +1,4 @@
-var { Todo, Todo2, Todo3, Todo4, Todo5, Todo6, Todo7, Todo8, Todo9 } = require("../model/schema");
+var { Todo, Todo2, Todo3, Todo4, Todo5, Todo6, Todo7, Todo8, Todo9, Todo10 } = require("../model/schema");
 const HTTP = require("../../constant/response.constant");
 
 var jwt = require("jsonwebtoken");
@@ -2066,17 +2066,35 @@ class class1 {
 
                                     await data222.save();
 
-                                    const futureTimeInSurat32 = currentTimeInSurat222.add(+3, 'minutes');
-                                    const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
+                                    if(result.message > 5){
 
-                                    let data2222 = new Todo7({
-                                        UserName: UserNameData,
-                                        Message: "Your vehicle is on the way, Thank You",
-                                        ParkInTime: "",
-                                        NotificationRemainingTime: formattedFutureTime32
-                                    });
+                                        const futureTimeInSurat32 = currentTimeInSurat222.add(+3, 'minutes');
+                                        const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
 
-                                    await data2222.save();
+                                        let data2222 = new Todo7({
+                                            UserName: UserNameData,
+                                            Message: "Your vehicle is on the way, Thank You",
+                                            ParkInTime: "",
+                                            NotificationRemainingTime: formattedFutureTime32
+                                        });
+    
+                                        await data2222.save();
+
+                                    }else{
+
+                                        const futureTimeInSurat32 = currentTimeInSurat222.add(+1, 'minutes');
+                                        const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
+
+                                        let data2222 = new Todo7({
+                                            UserName: UserNameData,
+                                            Message: "Your vehicle is on the way, Thank You",
+                                            ParkInTime: "",
+                                            NotificationRemainingTime: formattedFutureTime32
+                                        });
+    
+                                        await data2222.save();
+
+                                    }
 
                                     User2.ValetStatus = 2;
                                     await User2.save();
@@ -7597,6 +7615,96 @@ class class2 {
 
                         var a = { "message": "Plan Cancle", "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(a);
+
+                    } else {
+                        var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                        res.status(HTTP.UNAUTHORIZED).json(a);
+                    }
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static K = async (req, res) => {
+        try {
+
+            if (req.Phone && req.body.Date && req.body.UserAction) {
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (User) {
+
+                    const headerValue = req.get('Authorization');
+
+                    if (User.token == headerValue) {
+
+                        var VehicleDetailArray = [];
+
+                        if(User.VehicleDetail){
+
+                            for (var j = 0; j < User.VehicleDetail.length; j++) {
+                                await VehicleDetailArray.push(User.VehicleDetail[j].RegistrationNumber)
+                            }
+
+                        }
+
+                        var message2 = { "message": "Data Load Successfully", "data": VehicleDetailArray, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message2);
+
+                    } else {
+                        var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }
+                        res.status(HTTP.UNAUTHORIZED).json(a);
+                    }
+
+                } else {
+
+                    var a = { "message": "Account Not Exist", "status": `${HTTP.NOT_FOUND}` }
+                    res.status(HTTP.NOT_FOUND).json(a);
+
+                }
+
+            } else {
+                var a = { "message": "Insufficient Data", "status": `${HTTP.BAD_REQUEST}` }
+                res.status(HTTP.BAD_REQUEST).json(a);
+            }
+
+        } catch (e) {
+            console.log(e);
+            var a = { "message": `${e}`, "status": `${HTTP.INTERNAL_SERVER_ERROR}` }
+            res.status(HTTP.INTERNAL_SERVER_ERROR).json(a);
+        }
+    };
+    static M = async (req, res) => {
+        try {
+
+            if (req.Phone && req.body.Date && req.body.RegistrationNumber && req.body.UserAction) {
+
+                var User = await Todo.findOne({ Phone: req.Phone })
+
+                if (User) {
+
+                    const headerValue = req.get('Authorization');
+
+                    if (User.token == headerValue) {
+
+                        var User2 = await Todo10.find({ Date: req.body.Date, RegistrationNumber: req.body.RegistrationNumber, UserAction: req.body.UserAction })
+
+                        var message2 = { "message": "Data Load Successfully", "data": User2, "status": `${HTTP.SUCCESS}` }
+                        res.status(HTTP.SUCCESS).json(message2);
 
                     } else {
                         var a = { "message": "Token has expired", "status": `${HTTP.UNAUTHORIZED}` }

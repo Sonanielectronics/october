@@ -423,4 +423,21 @@ var PaymentSchema = new mongoose.Schema({
 
 var Todo9 = mongoose.model("PaymentCollection", PaymentSchema);
 
-module.exports = { Todo, Todo2, Todo3, Todo4, Todo5, Todo6, Todo7, Todo8, Todo9 };
+var PictureSchema = new mongoose.Schema({
+  Date: {
+    type: String,
+  },
+  UserAction: {
+    type: String,
+  },
+  RegistrationNumber: {
+    type: String,
+  },
+  Pictures: {
+    type: Array,
+  }
+});
+
+var Todo10 = mongoose.model("PictureCollection", PictureSchema);
+
+module.exports = { Todo, Todo2, Todo3, Todo4, Todo5, Todo6, Todo7, Todo8, Todo9, Todo10 };
