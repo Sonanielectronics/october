@@ -1316,6 +1316,7 @@ class class1 {
                                 }
 
                                 const formattedDateTime = `${currentYear} ${currentMonth} ${currentDay} ${currentHours} ${currentMinutes} ${currentSeconds}`;
+                                const formattedDateTime2 = `${currentYear}-${currentMonth}-${currentDay}`;
 
                                 const files = req.files;
 
@@ -1411,6 +1412,15 @@ class class1 {
                                 RegistrationNumber: req.body.RegistrationNumber,
                                 Status: "",
                             };
+
+                            let data222 = new Todo10({
+                                Date: formattedDateTime2,
+                                Pictures: locations,
+                                RegistrationNumber: req.body.RegistrationNumber,
+                                UserAction: "ParkIn"
+                            });
+
+                            await data222.save();
 
                             axios.post(`${Ip}/StatusChange`, postData)
                                 .then(response => {
