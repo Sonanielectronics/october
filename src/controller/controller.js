@@ -7677,7 +7677,7 @@ class class2 {
     static K = async (req, res) => {
         try {
 
-            if (req.Phone && req.body.Date && req.body.UserAction) {
+            if (req.Phone) {
 
                 var User = await Todo.findOne({ Phone: req.Phone })
 
@@ -7738,17 +7738,17 @@ class class2 {
 
                         var User2 = await Todo10.find({ Date: req.body.Date, RegistrationNumber: req.body.RegistrationNumber, UserAction: req.body.UserAction })
 
-                        var locations = [];
+                        // var locations = [];
 
-                        for(var i=0;i<User2.length;i++){
+                        // for(var i=0;i<User2.length;i++){
                             
-                            for(var j=0;j<User2[i].Pictures.length;j++){
-                                await locations.push(User2[i].Pictures[j])
-                            }
+                        //     for(var j=0;j<User2[i].Pictures.length;j++){
+                        //         await locations.push(User2[i].Pictures[j])
+                        //     }
 
-                        }
+                        // }
 
-                        var message2 = { "message": "Data Load Successfully", "data": locations, "status": `${HTTP.SUCCESS}` }
+                        var message2 = { "message": "Data Load Successfully", "data": User2, "status": `${HTTP.SUCCESS}` }
                         res.status(HTTP.SUCCESS).json(message2);
 
                     } else {
