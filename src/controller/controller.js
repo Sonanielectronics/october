@@ -2079,7 +2079,7 @@ class class1 {
 
                                     await data222.save();
 
-                                    if(result.message > 5){
+                                    if (result.message > 5) {
 
                                         const futureTimeInSurat32 = currentTimeInSurat222.add(+3, 'minutes');
                                         const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
@@ -2090,10 +2090,10 @@ class class1 {
                                             ParkInTime: "",
                                             NotificationRemainingTime: formattedFutureTime32
                                         });
-    
+
                                         await data2222.save();
 
-                                    }else{
+                                    } else {
 
                                         const futureTimeInSurat32 = currentTimeInSurat222.add(+1, 'minutes');
                                         const formattedFutureTime32 = futureTimeInSurat32.format('YYYY-MM-DDTHH:mm:ss');
@@ -2104,7 +2104,7 @@ class class1 {
                                             ParkInTime: "",
                                             NotificationRemainingTime: formattedFutureTime32
                                         });
-    
+
                                         await data2222.save();
 
                                     }
@@ -4019,9 +4019,9 @@ class class1 {
 
                                 ParkedCar[ParkedCar.length - 1].WaitTime = data;
 
-                                var User22 = await ParkedCar[ParkedCar.length - 1].CarParkBy ;
+                                var User22 = await ParkedCar[ParkedCar.length - 1].CarParkBy;
                                 var User222 = await Todo8.find({ Username: User22 });
-                                var User2222 = await User222[0].Name ;
+                                var User2222 = await User222[0].Name;
                                 ParkedCar[ParkedCar.length - 1].CarParkBy = User2222;
 
                             } else {
@@ -4038,9 +4038,9 @@ class class1 {
 
                                 ParkedCar[ParkedCar.length - 1].WaitTime = data;
 
-                                var User22 = await ParkedCar[ParkedCar.length - 1].CarParkBy ;
+                                var User22 = await ParkedCar[ParkedCar.length - 1].CarParkBy;
                                 var User222 = await Todo8.find({ Username: User22 });
-                                var User2222 = await User222[0].Name ;
+                                var User2222 = await User222[0].Name;
                                 ParkedCar[ParkedCar.length - 1].CarParkBy = User2222;
 
                             }
@@ -7438,7 +7438,7 @@ class class2 {
 
                 var FcmToken = await User2[0].Fcm;
                 var SendingMessage = await User[i].Message;
-                
+
                 const message = {
                     notification: {
                         title: SendingMessage
@@ -7677,7 +7677,7 @@ class class2 {
     static K = async (req, res) => {
         try {
 
-            if (req.Phone) {
+            if (req.Phone && req.body.Date) {
 
                 var User = await Todo.findOne({ Phone: req.Phone })
 
@@ -7689,10 +7689,37 @@ class class2 {
 
                         var VehicleDetailArray = [];
 
-                        if(User.VehicleDetail){
+                        if (User.VehicleDetail) {
 
                             for (var j = 0; j < User.VehicleDetail.length; j++) {
-                                await VehicleDetailArray.push(User.VehicleDetail[j].RegistrationNumber)
+
+                                var PushVehicle = User.VehicleDetail[j];
+
+                                var User2 = await Todo10.find({ Date: req.body.Date, RegistrationNumber: PushVehicle.RegistrationNumber, UserAction: "ParkIn" })
+                                var User3 = await Todo10.find({ Date: req.body.Date, RegistrationNumber: PushVehicle.RegistrationNumber, UserAction: "ParkOut" })
+
+                                var User2Length 
+                                var User3Length 
+
+                                if(User2.length == 0){
+                                    User2Length = 0
+                                }else{
+                                    User2Length = 1
+                                }
+
+                                if(User3.length == 0){
+                                    User3Length = 0
+                                }else{
+                                    User3Length = 1
+                                }
+
+
+                                await VehicleDetailArray.push({
+                                    RegistrationNumber: PushVehicle.RegistrationNumber,
+                                    ParkIn: User2Length,
+                                    ParkOut: User3Length
+                                })
+
                             }
 
                         }
@@ -7741,7 +7768,7 @@ class class2 {
                         // var locations = [];
 
                         // for(var i=0;i<User2.length;i++){
-                            
+
                         //     for(var j=0;j<User2[i].Pictures.length;j++){
                         //         await locations.push(User2[i].Pictures[j])
                         //     }
